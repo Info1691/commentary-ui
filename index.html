@@ -1,170 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Trust Law Commentary</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    fetch("commentary.json")
+      .then(res => res.json())
+      .then(data => {
+        const select = document.getElementById("commentarySelect");
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background-color: #f0f4ff;
-    }
-
-    header {
-      background-color: #0b5394;
-      color: white;
-      padding: 1em;
-      display: flex;
-      align-items: center;
-      gap: 5.5em;
-    }
-
-    #logo {
-      height: 50px;
-      width: auto;
-      object-fit: contain;
-      background-color: white;
-      padding: 0.2em;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 1.8em;
-    }
-
-    main {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 1em;
-      background-color: white;
-      min-height: 100vh;
-    }
-
-    #selector, #metadata, #actions {
-      margin-bottom: 1em;
-    }
-
-    .text-container {
-      white-space: pre-wrap;
-      background: #fdfdfd;
-      padding: 1em;
-      border: 1px solid #ccc;
-      overflow-x: auto;
-      max-height: none;
-    }
-
-    button {
-      padding: 0.6em 1.2em;
-      font-size: 1em;
-      margin-right: 0.5em;
-      cursor: pointer;
-    }
-
-    select {
-      font-size: 1em;
-      padding: 0.4em;
-    }
-  </style>
-
-  <style media="print">
-    body * {
-      visibility: hidden;
-    }
-
-    #commentaryText, #commentaryText * {
-      visibility: visible;
-    }
-
-    #commentaryText {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      max-height: none !important;
-      overflow: visible !important;
-      white-space: pre-wrap;
-    }
-  </style>
-</head>
-
-<body>
-  <header>
-    <img src="logo.png" alt="Blue Chip Logo" id="logo" />
-    <h1>Trust Law Commentary</h1>
-  </header>
-
-  <main>
-    <section id="selector">
-      <label for="commentarySelect">Select Commentary:</label>
-      <select id="commentarySelect">
-        <option value="">-- Choose --</option>
-      </select>
-    </section>
-
-    <section id="metadata">
-      <p><strong>Jurisdiction:</strong> <span id="jurisdiction"></span></p>
-      <p><strong>Reference:</strong> <span id="reference"></span></p>
-      <p><strong>Source:</strong> <span id="source"></span></p>
-    </section>
-
-    <section id="textDisplay" class="text-container">
-      <pre id="commentaryText"></pre>
-    </section>
-
-    <section id="actions">
-      <button onclick="window.print()">🖨️ Print</button>
-      <button id="exportBtn">📄 Export to TXT</button>
-    </section>
-  </main>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      fetch("commentary.json")
-        .then(res => res.json())
-        .then(data => {
-          const flagMap = {
-          jersey: "🇯🇪",
-          uk: "🇬🇧",
-          iom: "🇮🇲"
-        };
-        document.getElementById("jurisdiction").textContent = `${flagMap[jurisdiction] || ""} ${jurisdiction.charAt(0).toUpperCase() + jurisdiction.slice(1)}`;
-          data.forEach(entry => {
-            const option = document.createElement("option");
-            option.value = entry.reference_url;
-            option.textContent = entry.title;
-            option.dataset.jurisdiction = entry.jurisdiction;
-            option.dataset.reference = entry.reference;
-            option.dataset.source = entry.source;
-            select.appendChild(option);
-          });
-
-          select.addEventListener("change", function () {
-            const url = this.value;
-            const jurisdiction = this.selectedOptions[0].dataset.jurisdiction;
-            const reference = this.selectedOptions[0].dataset.reference;
-            const source = this.selectedOptions[0].dataset.source;
-            document.getElementById("jurisdiction").textContent = jurisdiction;
-            document.getElementById("reference").textContent = reference;
-            document.getElementById("source").textContent = source;
-            fetch(url)
-              .then(res => res.text())
-              .then(text => {
-                document.getElementById("commentaryText").textContent = text;
-              });
-          });
+        data.forEach(entry => {
+          const option = document.createElement("option");
+          option.value = entry.reference_url;
+          option.textContent = entry.title;
+          option.dataset.jurisdiction = entry.jurisdiction;
+          option.dataset.reference = entry.reference;
+          option.dataset.source = entry.source;
+          select.appendChild(option);
         });
 
-      document.getElementById("exportBtn").addEventListener("click", () => {
-        const text = document.getElementById("commentaryText").textContent;
-        const blob = new Blob([text], { type: "text/plain" });
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = "commentary-export.txt";
-        link.click();
+        select.addEventListener("change", function () {
+          const url = this.value;
+          const jurisdiction = this.selectedOptions[0].dataset.jurisdiction;
+          const reference = this.selectedOptions[0].dataset.reference;
+          const source = this.selectedOptions[0].dataset.source;
+
+          const flagMap = {
+            jersey: "🇯🇪",
+            uk: "🇬🇧",
+            iom: "🇮🇲"
+          };
+
+          document.getElementById("jurisdiction").textContent =
+            `${flagMap[jurisdiction] || ""} ${jurisdiction.charAt(0).toUpperCase() + jurisdiction.slice(1)}`;
+          document.getElementById("reference").textContent = reference;
+          document.getElementById("source").textContent = source;
+
+          fetch(url)
+            .then(res => res.text())
+            .then(text => {
+              document.getElementById("commentaryText").textContent = text;
+            });
+        });
       });
+
+    document.getElementById("exportBtn").addEventListener("click", () => {
+      const text = document.getElementById("commentaryText").textContent;
+      const blob = new Blob([text], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "commentary-export.txt";
+      link.click();
     });
-  </script>
-</body>
-</html>
+  });
+</script>
