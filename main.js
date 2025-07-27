@@ -1,57 +1,58 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const dropdown = document.querySelector('select');
+  const select = document.getElementById('commentarySelect');
   const jurisdiction = document.getElementById('jurisdiction');
   const reference = document.getElementById('reference');
   const source = document.getElementById('source');
-  const commentaryBox = document.querySelector('textarea');
-  const exportButton = document.getElementById('exportButton');
-  const errorBox = document.getElementById('errorBox');
+  const textarea = document.getElementById('commentaryText');
+  const error = document.getElementById('error');
+  const exportBtn = document.getElementById('exportBtn');
 
-  fetch('commentary.txt') // Now reads from renamed .txt to bypass CORS
-    .then(response => response.text())
-    .then(text => {
-      try {
-        const data = JSON.parse(text);
-        data.forEach((item, index) => {
-          const option = document.createElement('option');
-          option.value = index;
-          option.textContent = item.title;
-          dropdown.appendChild(option);
-        });
-
-        dropdown.addEventListener('change', () => {
-          const selected = data[dropdown.value];
-          if (selected) {
-            jurisdiction.textContent = selected.jurisdiction || '—';
-            reference.textContent = selected.reference || '—';
-            source.textContent = selected.source || '—';
-
-            fetch(selected.reference_url)
-              .then(res => res.text())
-              .then(content => {
-                commentaryBox.value = content;
-              })
-              .catch(() => {
-                commentaryBox.value = 'Error loading commentary text.';
-              });
-          }
-        });
-
-        errorBox.style.display = 'none';
-      } catch (e) {
-        errorBox.textContent = 'Error parsing commentary file.';
-      }
+  fetch('commentary.json')
+    .then(response => {
+      if (!response.ok) throw new Error('Network response error');
+      return response.json();
     })
-    .catch(error => {
-      console.error('Error loading JSON:', error);
-      errorBox.textContent = 'Error loading commentary list.';
-    });
+    .then(data => {
+      data.forEach((entry, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = entry.title;
+        select.appendChild(option);
+      });
 
-  exportButton.addEventListener('click', () => {
-    const blob = new Blob([commentaryBox.value], { type: 'text/plain' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'commentary.txt';
-    a.click();
-  });
+      select.addEventListener('change', () => {
+        const selected = data[select.value];
+        if (!selected) return;
+
+        jurisdiction.textContent = selected.jurisdiction;
+        reference.textContent = selected.reference;
+        source.textContent = selected.source;
+
+        fetch(selected.reference_url)
+          .then(res => res.text())
+          .then(text => {
+            textarea.value = text;
+            error.textContent = '';
+          })
+          .catch(err => {
+            textarea.value = '';
+            error.textContent = 'Failed to load commentary text.';
+            console.error(err);
+          });
+
+        exportBtn.onclick = () => {
+          const blob = new Blob([textarea.value], { type: 'text/plain' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `${selected.reference}.txt`;
+          a.click();
+          URL.revokeObjectURL(url);
+        };
+      });
+    })
+    .catch(err => {
+      error.textContent = 'Error loading commentary list.';
+      console.error('Error loading JSON:', err);
+    });
 });
