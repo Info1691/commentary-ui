@@ -28,14 +28,14 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       select.addEventListener("change", () => {
-        const selectedOption = select.options[select.selectedIndex];
-        const url = selectedOption.value;
-        jurisdictionField.textContent = selectedOption.dataset.jurisdiction || "—";
-        referenceField.textContent = selectedOption.dataset.reference || "—";
-        sourceField.textContent = selectedOption.dataset.source || "—";
-        currentReference = selectedOption.dataset.reference || "commentary";
+        const selected = select.options[select.selectedIndex];
+        const url = selected.value;
+        jurisdictionField.textContent = selected.dataset.jurisdiction || "—";
+        referenceField.textContent = selected.dataset.reference || "—";
+        sourceField.textContent = selected.dataset.source || "—";
+        currentReference = selected.dataset.reference || "commentary";
 
-        if (url === "Select a Commentary") return;
+        if (!url || url === "Select a Commentary") return;
 
         fetch(url)
           .then(response => {
