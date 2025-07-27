@@ -1,60 +1,69 @@
 document.addEventListener("DOMContentLoaded", () => {
   const select = document.getElementById("commentarySelect");
   const textArea = document.getElementById("commentaryText");
-  const errorEl = document.getElementById("error");
-  const jurisdictionEl = document.getElementById("jurisdiction");
-  const referenceEl = document.getElementById("reference");
-  const sourceEl = document.getElementById("source");
+  const error = document.getElementById("error");
   const exportBtn = document.getElementById("exportBtn");
-  const printBtn = document.getElementById("printBtn");
+
+  const jurisdictionField = document.getElementById("jurisdiction");
+  const referenceField = document.getElementById("reference");
+  const sourceField = document.getElementById("source");
 
   let currentText = "";
+  let currentReference = "commentary";
 
-  fetch("data/commentary.json")
-    .then((res) => res.json())
-    .then((data) => {
-      data.forEach((entry, index) => {
+  fetch("data/commentary/commentary.json")
+    .then(response => {
+      if (!response.ok) throw new Error("Failed to load JSON");
+      return response.json();
+    })
+    .then(data => {
+      data.forEach(item => {
         const option = document.createElement("option");
-        option.value = index;
-        option.textContent = entry.title;
+        option.value = item.reference_url;
+        option.textContent = item.title;
+        option.dataset.jurisdiction = item.jurisdiction;
+        option.dataset.reference = item.reference;
+        option.dataset.source = item.source;
         select.appendChild(option);
       });
 
       select.addEventListener("change", () => {
-        const entry = data[select.value];
-        if (!entry) return;
+        const selectedOption = select.options[select.selectedIndex];
+        const url = selectedOption.value;
+        jurisdictionField.textContent = selectedOption.dataset.jurisdiction || "—";
+        referenceField.textContent = selectedOption.dataset.reference || "—";
+        sourceField.textContent = selectedOption.dataset.source || "—";
+        currentReference = selectedOption.dataset.reference || "commentary";
 
-        jurisdictionEl.textContent = entry.jurisdiction;
-        referenceEl.textContent = entry.reference;
-        sourceEl.textContent = entry.source;
+        if (url === "Select a Commentary") return;
 
-        fetch(entry.reference_url)
-          .then((res) => res.text())
-          .then((text) => {
+        fetch(url)
+          .then(response => {
+            if (!response.ok) throw new Error("Failed to load commentary text");
+            return response.text();
+          })
+          .then(text => {
             textArea.value = text;
             currentText = text;
-            errorEl.textContent = "";
+            error.textContent = "";
           })
-          .catch((err) => {
+          .catch(() => {
+            error.textContent = "Error loading commentary text.";
             textArea.value = "";
-            errorEl.textContent = "Error loading commentary text.";
+            currentText = "";
           });
       });
     })
-    .catch((err) => {
-      errorEl.textContent = "Error loading commentary list.";
+    .catch(() => {
+      error.textContent = "Error loading commentary list.";
     });
 
   exportBtn.addEventListener("click", () => {
     if (!currentText) return;
     const blob = new Blob([currentText], { type: "text/plain" });
-    const link = document.createElement("a");
-    link.download = "commentary.txt";
-    link.href = URL.createObjectURL(blob);
-    link.click();
-  });
-
-  printBtn.addEventListener("click", () => {
-    window.print();
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `${currentReference}.txt`;
+    a.click();
   });
 });
