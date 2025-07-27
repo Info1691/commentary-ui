@@ -1,52 +1,117 @@
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    fetch("data/commentary.json")
-      .then(res => res.json())
-      .then(data => {
-        const select = document.getElementById("commentarySelect");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Commentary Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px auto;
+      max-width: 800px;
+      padding: 0 20px;
+      text-align: center;
+    }
+    #logo {
+      width: 120px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+    }
+    select, button {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 1rem;
+      width: 100%;
+    }
+    .meta {
+      margin: 20px 0;
+      font-weight: bold;
+    }
+    #commentaryText {
+      text-align: left;
+      white-space: pre-wrap;
+      background-color: #f4f4f4;
+      padding: 15px;
+      border: 1px solid #ccc;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <img id="logo" src="logo.png" alt="Logo" />
+  <h1>Commentary Viewer</h1>
 
-        data.forEach(entry => {
-          const option = document.createElement("option");
-          option.value = entry.reference_url;
-          option.textContent = entry.title;
-          option.dataset.jurisdiction = entry.jurisdiction;
-          option.dataset.reference = entry.reference;
-          option.dataset.source = entry.source;
-          select.appendChild(option);
+  <select id="commentarySelect">
+    <option value="">Select a Commentary</option>
+  </select>
+
+  <div class="meta">Jurisdiction: <span id="jurisdiction">—</span></div>
+  <div class="meta">Reference: <span id="reference">—</span></div>
+  <div class="meta">Source: <span id="source">—</span></div>
+
+  <div id="commentaryText">Please select a commentary from the dropdown above.</div>
+
+  <button id="exportBtn">Export Commentary as .txt</button>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const select = document.getElementById("commentarySelect");
+
+      fetch("data/commentary.json")
+        .then(res => res.json())
+        .then(data => {
+          data.forEach(entry => {
+            const option = document.createElement("option");
+            option.value = entry.reference_url;
+            option.textContent = entry.title;
+            option.dataset.jurisdiction = entry.jurisdiction;
+            option.dataset.reference = entry.reference;
+            option.dataset.source = entry.source;
+            select.appendChild(option);
+          });
+        })
+        .catch(err => {
+          document.getElementById("commentaryText").textContent = "Error loading commentary list.";
+          console.error("Error loading JSON:", err);
         });
 
-        select.addEventListener("change", function () {
-          const url = this.value;
-          const jurisdiction = this.selectedOptions[0].dataset.jurisdiction;
-          const reference = this.selectedOptions[0].dataset.reference;
-          const source = this.selectedOptions[0].dataset.source;
+      select.addEventListener("change", function () {
+        const selected = this.selectedOptions[0];
+        if (!selected || !this.value) return;
 
-          const flagMap = {
-            jersey: "🇯🇪",
-            uk: "🇬🇧",
-            iom: "🇮🇲"
-          };
+        const jurisdiction = selected.dataset.jurisdiction;
+        const reference = selected.dataset.reference;
+        const source = selected.dataset.source;
+        const url = this.value;
 
-          document.getElementById("jurisdiction").textContent =
-            `${flagMap[jurisdiction] || ""} ${jurisdiction.charAt(0).toUpperCase() + jurisdiction.slice(1)}`;
-          document.getElementById("reference").textContent = reference;
-          document.getElementById("source").textContent = source;
+        document.getElementById("jurisdiction").textContent = jurisdiction;
+        document.getElementById("reference").textContent = reference;
+        document.getElementById("source").textContent = source;
 
-          fetch(url)
-            .then(res => res.text())
-            .then(text => {
-              document.getElementById("commentaryText").textContent = text;
-            });
-        });
+        fetch(url)
+          .then(res => res.text())
+          .then(text => {
+            document.getElementById("commentaryText").textContent = text;
+          })
+          .catch(err => {
+            document.getElementById("commentaryText").textContent = "Error loading commentary file.";
+            console.error("Error loading .txt:", err);
+          });
       });
 
-    document.getElementById("exportBtn").addEventListener("click", () => {
-      const text = document.getElementById("commentaryText").textContent;
-      const blob = new Blob([text], { type: "text/plain" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "commentary-export.txt";
-      link.click();
+      document.getElementById("exportBtn").addEventListener("click", () => {
+        const text = document.getElementById("commentaryText").textContent;
+        const blob = new Blob([text], { type: "text/plain" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "commentary-export.txt";
+        link.click();
+      });
     });
-  });
-</script>
+  </script>
+</body>
+</html>
