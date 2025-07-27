@@ -1,72 +1,57 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const select = document.getElementById("commentarySelect");
-  const jurisdictionDisplay = document.getElementById("jurisdiction");
-  const referenceDisplay = document.getElementById("reference");
-  const sourceDisplay = document.getElementById("source");
-  const textDisplay = document.getElementById("commentaryText");
-  const errorDisplay = document.getElementById("error");
+document.addEventListener('DOMContentLoaded', () => {
+  const dropdown = document.querySelector('select');
+  const jurisdiction = document.getElementById('jurisdiction');
+  const reference = document.getElementById('reference');
+  const source = document.getElementById('source');
+  const commentaryBox = document.querySelector('textarea');
+  const exportButton = document.getElementById('exportButton');
+  const errorBox = document.getElementById('errorBox');
 
-  const flagMap = {
-    jersey: "🇯🇪",
-    uk: "🇬🇧",
-    iom: "🇮🇲"
-  };
+  fetch('commentary.txt') // Now reads from renamed .txt to bypass CORS
+    .then(response => response.text())
+    .then(text => {
+      try {
+        const data = JSON.parse(text);
+        data.forEach((item, index) => {
+          const option = document.createElement('option');
+          option.value = index;
+          option.textContent = item.title;
+          dropdown.appendChild(option);
+        });
 
-  fetch("data/commentary.json")
-    .then(res => {
-      if (!res.ok) throw new Error("Unable to load commentary list.");
-      return res.json();
+        dropdown.addEventListener('change', () => {
+          const selected = data[dropdown.value];
+          if (selected) {
+            jurisdiction.textContent = selected.jurisdiction || '—';
+            reference.textContent = selected.reference || '—';
+            source.textContent = selected.source || '—';
+
+            fetch(selected.reference_url)
+              .then(res => res.text())
+              .then(content => {
+                commentaryBox.value = content;
+              })
+              .catch(() => {
+                commentaryBox.value = 'Error loading commentary text.';
+              });
+          }
+        });
+
+        errorBox.style.display = 'none';
+      } catch (e) {
+        errorBox.textContent = 'Error parsing commentary file.';
+      }
     })
-    .then(data => {
-      data.forEach(entry => {
-        const option = document.createElement("option");
-        option.value = entry.reference_url;
-        option.textContent = entry.title;
-        option.dataset.jurisdiction = entry.jurisdiction;
-        option.dataset.reference = entry.reference;
-        option.dataset.source = entry.source;
-        select.appendChild(option);
-      });
-
-      errorDisplay.textContent = ""; // clear any error
-    })
-    .catch(err => {
-      errorDisplay.textContent = "Error loading commentary list.";
-      console.error("Error loading JSON:", err);
+    .catch(error => {
+      console.error('Error loading JSON:', error);
+      errorBox.textContent = 'Error loading commentary list.';
     });
 
-  select.addEventListener("change", function () {
-    const selected = this.selectedOptions[0];
-    const url = selected.value;
-    const jurisdiction = selected.dataset.jurisdiction;
-    const reference = selected.dataset.reference;
-    const source = selected.dataset.source;
-
-    jurisdictionDisplay.textContent = `${flagMap[jurisdiction] || ""} ${jurisdiction}`;
-    referenceDisplay.textContent = reference;
-    sourceDisplay.textContent = source;
-
-    fetch(url)
-      .then(res => {
-        if (!res.ok) throw new Error("Commentary text could not be loaded.");
-        return res.text();
-      })
-      .then(text => {
-        textDisplay.value = text;
-        errorDisplay.textContent = "";
-      })
-      .catch(err => {
-        textDisplay.value = "";
-        errorDisplay.textContent = "Error loading commentary text.";
-        console.error(err);
-      });
-  });
-
-  document.getElementById("exportBtn").addEventListener("click", () => {
-    const blob = new Blob([textDisplay.value], { type: "text/plain" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "commentary-export.txt";
-    link.click();
+  exportButton.addEventListener('click', () => {
+    const blob = new Blob([commentaryBox.value], { type: 'text/plain' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'commentary.txt';
+    a.click();
   });
 });
