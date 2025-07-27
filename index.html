@@ -1,6 +1,6 @@
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    fetch("commentary.json")
+    fetch("data/commentary.json")
       .then(res => res.json())
       .then(data => {
         const select = document.getElementById("commentarySelect");
