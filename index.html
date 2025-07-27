@@ -124,7 +124,12 @@
       fetch("commentary.json")
         .then(res => res.json())
         .then(data => {
-          const select = document.getElementById("commentarySelect");
+          const flagMap = {
+          jersey: "🇯🇪",
+          uk: "🇬🇧",
+          iom: "🇮🇲"
+        };
+        document.getElementById("jurisdiction").textContent = `${flagMap[jurisdiction] || ""} ${jurisdiction.charAt(0).toUpperCase() + jurisdiction.slice(1)}`;
           data.forEach(entry => {
             const option = document.createElement("option");
             option.value = entry.reference_url;
