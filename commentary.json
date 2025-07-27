@@ -2,15 +2,15 @@
   {
     "title": "Failure of Trust Company Governance – Lessons from Jersey",
     "jurisdiction": "jersey",
-    "reference": "MONDAQ-JSY-001",
-    "source": "mondaq",
+    "reference": "mondaq-trust-company-failure",
+    "source": "mondaq.com",
     "reference_url": "data/commentary/jersey/mondaq-trust-company-failure.txt"
   },
   {
     "title": "Fiduciary Litigation Exposure in UK Offshore Structures",
     "jurisdiction": "uk",
-    "reference": "LEXIS-UK-002",
-    "source": "lexis",
+    "reference": "lexis-risk-report",
+    "source": "lexisnexis.com",
     "reference_url": "data/commentary/uk/lexis-risk-report.txt"
   }
 ]
