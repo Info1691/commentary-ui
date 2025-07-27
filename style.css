@@ -1,82 +1,79 @@
 body {
   font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
   margin: 0;
-  background-color: #f8f9fa;
+  padding: 0;
+  text-align: center;
 }
 
 header {
-  background-color: #0078e7;
-  color: white;
-  padding: 1rem;
+  background-color: #0072ce;
+  padding: 10px 20px;
   display: flex;
   align-items: center;
 }
 
 #logo {
   height: 40px;
-  margin-right: 1rem;
+  margin-right: 15px;
 }
 
-h1 {
-  font-size: 1.8rem;
+header h1 {
+  color: white;
+  font-size: 24px;
   margin: 0;
 }
 
 .container {
-  max-width: 700px;
-  margin: 2rem auto;
+  max-width: 800px;
+  margin: 30px auto;
   background: white;
-  padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
+  text-align: left;
 }
 
-label, select {
+label, select, textarea {
   display: block;
   width: 100%;
-  font-size: 1rem;
-  margin-bottom: 0.75rem;
-}
-
-select {
-  padding: 0.5rem;
-  border-radius: 5px;
-  font-size: 1rem;
-}
-
-.meta p {
-  margin: 0.25rem 0;
-  font-size: 1rem;
+  margin-top: 10px;
+  font-size: 14px;
 }
 
 textarea {
-  width: 100%;
   height: 200px;
-  margin-top: 1rem;
-  font-size: 11pt;
-  padding: 0.75rem;
-  font-family: inherit;
-  border-radius: 5px;
   resize: vertical;
+  font-size: 14px;
+  padding: 10px;
+  margin-top: 10px;
+  font-family: Arial, sans-serif;
 }
 
-.error {
+.meta p {
+  margin: 5px 0;
+  font-size: 13px;
+}
+
+#error {
   color: red;
-  font-size: 0.95rem;
+  margin-top: 10px;
 }
 
-.button-group {
-  margin-top: 1rem;
-  display: flex;
-  gap: 1rem;
+.buttons {
+  margin-top: 20px;
 }
 
 button {
-  padding: 0.6rem 1rem;
-  font-size: 1rem;
-  background-color: #0078e7;
+  padding: 8px 16px;
+  margin-right: 10px;
+  background-color: #0072ce;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
+}
+
+button:hover {
+  background-color: #005fa3;
 }
