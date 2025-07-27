@@ -1,73 +1,68 @@
 body {
   margin: 0;
-  font-family: Helvetica, Arial, sans-serif;
-  background-color: #f6f6f6;
-  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
 }
 
 header {
-  background-color: #003366cc;
-  padding: 1em 0;
+  background-color: #0074e8;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
 }
 
-header img {
-  height: 64px;
+#logo {
+  height: 50px;
+  margin-right: 20px;
   background-color: white;
-  padding: 8px;
-  border-radius: 6px;
+  padding: 5px;
 }
 
-h1 {
+header h1 {
   color: white;
-  margin: 0.5em 0 0;
+  margin: 0;
 }
 
-main {
-  background: white;
-  margin: 2em auto;
-  padding: 2em;
+main .container {
+  background-color: white;
   max-width: 700px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  border-radius: 12px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
 }
 
 select {
-  font-size: 1em;
-  padding: 0.5em;
-  width: 90%;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-.meta {
-  text-align: left;
-  margin-top: 1em;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 20px;
 }
 
 .meta p {
-  margin: 0.3em 0;
+  margin: 6px 0;
 }
 
-pre {
-  background: #f2f2f2;
-  padding: 1em;
-  text-align: left;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  margin-top: 1em;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+textarea {
+  width: 100%;
+  height: 250px;
+  padding: 10px;
+  resize: vertical;
+  margin-bottom: 10px;
 }
 
 button {
-  margin-top: 1em;
-  background-color: #0077ee;
+  background-color: #0074e8;
   color: white;
-  padding: 0.6em 1.2em;
   border: none;
-  border-radius: 6px;
-  font-size: 1em;
+  padding: 10px 20px;
   cursor: pointer;
+  border-radius: 4px;
 }
 
 button:hover {
@@ -76,5 +71,6 @@ button:hover {
 
 .error {
   color: red;
-  margin-top: 1em;
+  font-size: 0.9em;
+  margin-top: 10px;
 }
