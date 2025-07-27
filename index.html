@@ -2,92 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Commentary Viewer</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      background-color: #f9f9f9;
-    }
-
-    header {
-      background-color: #0077ee;
-      padding: 1em 0;
-    }
-
-    header img {
-      height: 60px;
-      background-color: white;
-      padding: 8px;
-      border-radius: 6px;
-    }
-
-    h1 {
-      color: white;
-      margin: 0.5em 0 0;
-    }
-
-    main {
-      padding: 1.5em;
-      max-width: 960px;
-      margin: auto;
-      background-color: #ffffff;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    select {
-      width: 80%;
-      padding: 0.5em;
-      font-size: 1em;
-    }
-
-    .meta {
-      margin-top: 1em;
-      text-align: left;
-    }
-
-    .meta strong {
-      display: inline-block;
-      width: 100px;
-    }
-
-    pre {
-      text-align: left;
-      background-color: #f4f4f4;
-      padding: 1em;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      border: 1px solid #ccc;
-      margin-top: 1em;
-    }
-
-    button {
-      margin-top: 1em;
-      padding: 0.5em 1em;
-      font-size: 1em;
-      background-color: #0077ee;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #005bb5;
-    }
-
-    #error {
-      color: red;
-      margin-top: 1em;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Blue Chip Consultancy Logo" />
+    <img src="logo.png" alt="Blue Chip Logo" />
     <h1>Commentary Viewer</h1>
   </header>
 
@@ -103,66 +24,11 @@
     </div>
 
     <pre id="commentaryText">Select a commentary to view the full text here.</pre>
-    <div id="error"></div>
+    <p id="error" class="error"></p>
 
     <button id="exportBtn">Export Commentary as .txt</button>
   </main>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      fetch("data/commentary.json")
-        .then(res => res.json())
-        .then(data => {
-          const select = document.getElementById("commentarySelect");
-
-          data.forEach(entry => {
-            const option = document.createElement("option");
-            option.value = entry.reference_url;
-            option.textContent = entry.title;
-            option.dataset.jurisdiction = entry.jurisdiction;
-            option.dataset.reference = entry.reference;
-            option.dataset.source = entry.source;
-            select.appendChild(option);
-          });
-
-          select.addEventListener("change", function () {
-            const url = this.value;
-            const jurisdiction = this.selectedOptions[0].dataset.jurisdiction;
-            const reference = this.selectedOptions[0].dataset.reference;
-            const source = this.selectedOptions[0].dataset.source;
-
-            const flagMap = {
-              jersey: "🇯🇪",
-              uk: "🇬🇧",
-              iom: "🇮🇲"
-            };
-
-            document.getElementById("jurisdiction").textContent =
-              `${flagMap[jurisdiction] || ""} ${jurisdiction.charAt(0).toUpperCase() + jurisdiction.slice(1)}`;
-            document.getElementById("reference").textContent = reference;
-            document.getElementById("source").textContent = source;
-
-            fetch(url)
-              .then(res => res.text())
-              .then(text => {
-                document.getElementById("commentaryText").textContent = text;
-              });
-          });
-        })
-        .catch(err => {
-          document.getElementById("error").textContent = "Error loading commentary list.";
-          console.error("Error loading JSON:", err);
-        });
-
-      document.getElementById("exportBtn").addEventListener("click", () => {
-        const text = document.getElementById("commentaryText").textContent;
-        const blob = new Blob([text], { type: "text/plain" });
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = "commentary-export.txt";
-        link.click();
-      });
-    });
-  </script>
+  <script src="main.js"></script>
 </body>
 </html>
