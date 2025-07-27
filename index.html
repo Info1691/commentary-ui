@@ -2,34 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Commentary Viewer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Commentary Viewer</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Blue Chip Logo" />
+    <img src="logo.png" alt="Blue Chip Logo" id="logo" />
     <h1>Commentary Viewer</h1>
   </header>
 
   <main>
-    <select id="commentarySelect">
-      <option>Select a Commentary</option>
-    </select>
+    <div class="container">
+      <label for="commentarySelect">Select a Commentary</label>
+      <select id="commentarySelect">
+        <option>Select a Commentary</option>
+      </select>
 
-    <div class="meta">
-      <p><strong>Jurisdiction:</strong> <span id="jurisdiction">—</span></p>
-      <p><strong>Reference:</strong> <span id="reference">—</span></p>
-      <p><strong>Source:</strong> <span id="source">—</span></p>
+      <div class="meta">
+        <p><strong>Jurisdiction:</strong> <span id="jurisdiction">—</span></p>
+        <p><strong>Reference:</strong> <span id="reference">—</span></p>
+        <p><strong>Source:</strong> <span id="source">—</span></p>
+      </div>
+
+      <textarea id="commentaryText" readonly placeholder="Select a commentary to view the full text here."></textarea>
+      <p id="error" class="error"></p>
+
+      <button id="exportBtn">Export Commentary as .txt</button>
     </div>
-
-    <pre id="commentaryText">Select a commentary to view the full text here.</pre>
-    <p id="error" class="error"></p>
-
-    <button id="exportBtn">Export Commentary as .txt</button>
   </main>
 
-  <script src="data/commentary.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
