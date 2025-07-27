@@ -1,58 +1,60 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const select = document.getElementById('commentarySelect');
-  const jurisdiction = document.getElementById('jurisdiction');
-  const reference = document.getElementById('reference');
-  const source = document.getElementById('source');
-  const textarea = document.getElementById('commentaryText');
-  const error = document.getElementById('error');
-  const exportBtn = document.getElementById('exportBtn');
+document.addEventListener("DOMContentLoaded", () => {
+  const select = document.getElementById("commentarySelect");
+  const textArea = document.getElementById("commentaryText");
+  const errorEl = document.getElementById("error");
+  const jurisdictionEl = document.getElementById("jurisdiction");
+  const referenceEl = document.getElementById("reference");
+  const sourceEl = document.getElementById("source");
+  const exportBtn = document.getElementById("exportBtn");
+  const printBtn = document.getElementById("printBtn");
 
-  fetch('commentary.json')
-    .then(response => {
-      if (!response.ok) throw new Error('Network response error');
-      return response.json();
-    })
-    .then(data => {
+  let currentText = "";
+
+  fetch("data/commentary.json")
+    .then((res) => res.json())
+    .then((data) => {
       data.forEach((entry, index) => {
-        const option = document.createElement('option');
+        const option = document.createElement("option");
         option.value = index;
         option.textContent = entry.title;
         select.appendChild(option);
       });
 
-      select.addEventListener('change', () => {
-        const selected = data[select.value];
-        if (!selected) return;
+      select.addEventListener("change", () => {
+        const entry = data[select.value];
+        if (!entry) return;
 
-        jurisdiction.textContent = selected.jurisdiction;
-        reference.textContent = selected.reference;
-        source.textContent = selected.source;
+        jurisdictionEl.textContent = entry.jurisdiction;
+        referenceEl.textContent = entry.reference;
+        sourceEl.textContent = entry.source;
 
-        fetch(selected.reference_url)
-          .then(res => res.text())
-          .then(text => {
-            textarea.value = text;
-            error.textContent = '';
+        fetch(entry.reference_url)
+          .then((res) => res.text())
+          .then((text) => {
+            textArea.value = text;
+            currentText = text;
+            errorEl.textContent = "";
           })
-          .catch(err => {
-            textarea.value = '';
-            error.textContent = 'Failed to load commentary text.';
-            console.error(err);
+          .catch((err) => {
+            textArea.value = "";
+            errorEl.textContent = "Error loading commentary text.";
           });
-
-        exportBtn.onclick = () => {
-          const blob = new Blob([textarea.value], { type: 'text/plain' });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = `${selected.reference}.txt`;
-          a.click();
-          URL.revokeObjectURL(url);
-        };
       });
     })
-    .catch(err => {
-      error.textContent = 'Error loading commentary list.';
-      console.error('Error loading JSON:', err);
+    .catch((err) => {
+      errorEl.textContent = "Error loading commentary list.";
     });
+
+  exportBtn.addEventListener("click", () => {
+    if (!currentText) return;
+    const blob = new Blob([currentText], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.download = "commentary.txt";
+    link.href = URL.createObjectURL(blob);
+    link.click();
+  });
+
+  printBtn.addEventListener("click", () => {
+    window.print();
+  });
 });
