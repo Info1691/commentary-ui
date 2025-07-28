@@ -4,13 +4,13 @@
     "jurisdiction": "jersey",
     "reference": "mondaq-trust-company-failure",
     "source": "mondaq.com",
-    "reference_url": "data/commentary/mondaq-trust-company-failure.txt"
+    "reference_url": "data/commentary/jersey/mondaq-trust-company-failure.txt"
   },
   {
     "title": "Fiduciary Litigation Exposure in UK Offshore Structures",
     "jurisdiction": "uk",
     "reference": "lexis-risk-report",
     "source": "lexisnexis.com",
-    "reference_url": "data/commentary/lexis-risk-report.txt"
+    "reference_url": "data/commentary/uk/lexis-risk-report.txt"
   }
 ]
