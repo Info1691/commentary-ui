@@ -1,0 +1,163 @@
+Collas Crill commentary on Hasting-Bass rule 28-May-25
+
+In response to a fast-changing and unpredictable world, important
+decisions about how best to structure and shelter private wealth can
+sometimes be forced upon trustees and UHNW families
+unexpectedly.
+  
+Families and trustees may often feel compelled to react under acute
+time pressure and with limited information. The 2024 decision of the
+UK to abolish its 'non-dom' regime, for decades the cornerstone of
+UK/offshore wealth planning, has forced many wealthy families to
+consider relocating themselves and radically restructuring their
+assets in response.
+  
+It is not uncommon – particularly where rapid and radical changes
+interact with complex tax rules – that oversights and mistakes occur
+with unforeseen consequences. Fortunately, where transactions
+involve Jersey trusts, there are options available to trustees and
+UHNW families to set aside transactions, entered into on the basis of
+a mistake, misunderstanding or other serious error.
+This article explores the options available, outlining the
+considerations, benefits and drawbacks of each.
+
+Two typical routes to set aside transactions
+There are typically two potential routes to set aside a transaction
+where there has been a mistake or other error in establishing a trust
+or during the course of its administration:
+
+Mistake, typically relevant when looking at how a trust has
+been established by a settlor but also relevant to trustees who
+make a mistake; and
+The 'Hastings-Bass' rule, typically involving the actions and
+decisions of trustees and power holders once a trust has been
+established, eg distributions, restructuring etc.
+
+In Jersey, both have been placed on a statutory footing in Art 47A-J
+Trusts (Jersey) Law 1984. Similar mechanisms exist to set aside
+transactions involving trusts in Guernsey, BVI and Cayman.
+
+Setting aside transactions subject to a mistake in Jersey
+In Jersey, the general principle is that a transaction executed by a
+settlor or a trustee can be set aside on the basis of mistake if the
+relevant mistake is sufficiently material to the transaction that it
+impacts the fundamental validity of the transaction and it is
+reasonable for the transaction to be set aside.
+This remedy can be of enormous assistance to settlors of Jersey
+trusts, to trustees and other fiduciaries as well as, potentially,
+beneficiaries.
+Jersey law takes a practical and flexible approach to the type of
+mistake that can vitiate transactions involving a trusts and trustees.
+While mistakes as to the tax effects or consequences of a transaction
+are common, there are other examples, including:
+
+any mistake as to any advantage to be gained by the transfer of
+property or from to a trust;
+
+any mistake as to the exercise of a particular power; and
+
+any mistake as to a fact existing or not existing at the time of
+(or before) the transfer disposition or the exercise of a power.
+It is not a requirement to show that any person lacked care or was
+otherwise responsible for the mistake coming about in order to seek
+to have the transaction set aside. This can avoid lengthy and
+expensive arguments and potentially having to sue professional
+advisors.
+
+The 'Hastings-Bass' rule in Jersey
+The 'Hastings-Bass' rule gives The Royal Court of Jersey (the Court)
+discretion to set aside an exercise of power – and any resulting
+
+transaction involving a trust – if it is clear that the trustee would not
+have acted as they did if the trustee had either:
+
+failed to take into account relevant considerations which the
+trustee ought to have taken into account when exercising the
+power; or
+
+took into account considerations which should properly have
+been disregarded.
+In Jersey, the 'Hastings-Bass' rule has been placed on a statutory
+footing to have the broadest possible application to a very wide
+number of circumstances affecting trustees.
+The relevant considerations may be advice from a professional
+advisor which ought to have been followed or, equally, incorrect
+advice that should not have been followed. However, any material
+consideration that the trustee has not properly considered (or the
+inverse – an irrelevant consideration to which the trustee has given
+too great a weight) are capable of giving grounds to have a
+transaction set aside.
+Examples of transactions that have been set aside include cases
+where:
+
+a trustee or settlor exercises a power over assets subject to a
+mistake such as misunderstanding of the tax implications of a
+transaction or failing to realise the impact of a particular
+decision on the trust’s beneficiaries;
+
+a trustee exercised a power to transfer and restructure assets,
+for the purposes of trying to avoid reporting requirements
+under French tax and deferral of the potential tax liabilities
+which would otherwise have been incurred in relation to the
+assets of the trusts; and
+
+the trustee or settlor did not have the necessary knowledge to
+make an informed decision, and it is shown that the decision
+would have been different had the correct facts or legal
+understanding been in place.
+
+These examples are touchstones of the overarching principle of
+ensuring that the trust is administered in accordance with its terms
+and the trustee's fiduciary duties. The Court's discretion to set aside
+reflects the overarching duty of trustees always to act and exercise
+their powers prudently in the best interests of the beneficiaries, and
+ensures that a mistake in the decision-making process does not
+negatively bind the trust to an outcome that would be detrimental to
+the beneficiaries.
+  
+Where there has been a mistake, the Court’s general view is that a
+beneficiary’s sole remedy should not be litigation against trustees
+and/or advisors, in circumstances where the beneficiary is not
+usually at fault and has already incurred loss by reason of an
+avoidable tax charge. Forcing a beneficiary to incur further expense
+in what may be uncertain litigation is unnecessary, undesirable and
+unjust.
+  
+The Court will not make an order to set aside a transaction which
+would prejudice a bona fide purchaser for value of any trust property
+without notice of the matters which make the transfer of trust
+property or the exercise of power in relation to trust property
+voidable.
+  
+While applications are generally conducted in private (withholding
+the names of the affected beneficiaries), the Court will usually
+require, as part of such applications, that any relevant tax authority
+is put on notice of the application.
+
+Who can apply?
+An application to set aside transactions on the basis of either mistake
+or the 'Hastings-Bass' rule can be made by:
+
+a settlor (or his personal representatives if deceased);
+a trustee;
+a beneficiary or an enforcer of a trust; or
+
+any other person with permission of the Court.
+
+Practical considerations for clients
+Trustees and settlors should ensure that they fully understand the
+tax and legal implications of their decisions and that they have
+received proper advice (from relevant lawyers and tax professionals)
+to minimise the risk of a mistake or misunderstanding which might
+mean a transaction has to be set aside.
+  
+Where mistakes occur, the Court's ability to set aside transactions
+involving trusts, and its pragmatic approach to such questions is of
+considerable value to settlors, trustees and beneficiaries of Jersey
+trusts, allowing mistakes to be corrected without undue complexity
+or restriction.
+  
+Moreover, there are nuances to how these rules operate between
+Jersey and other offshore jurisdictions such as Guernsey, BVI and the
+Cayman Islands. These distinctions can be highly relevant where
+there are cross-jurisdictional interests, structures or assets.
