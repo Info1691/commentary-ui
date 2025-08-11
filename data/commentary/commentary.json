@@ -12,5 +12,12 @@
     "reference": "lexis-risk-report",
     "source": "lexisnexis.com",
     "reference_url": "data/commentary/uk/lexis-risk-report.txt"
+  },
+  {
+    "title": "Anti-Bartlett Clauses – Lessons from Zhang Li",
+    "jurisdiction": "jersey",
+    "reference": "anti-bartlett-zhang-li",
+    "source": "mourant.com",
+    "reference_url": "data/commentary/jersey/anti-bartlett-zhang-li.txt"
   }
 ]
