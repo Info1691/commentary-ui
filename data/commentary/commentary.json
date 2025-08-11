@@ -19,5 +19,12 @@
     "reference": "anti-bartlett-zhang-li",
     "source": "mourant.com",
     "reference_url": "data/commentary/jersey/anti-bartlett-zhang-li.txt"
+  },
+  {
+    "title": "Hastings-Bass - commentary from Collas Crill May 25",
+    "jurisdiction": "jersey",
+    "reference": "hastings-bass",
+    "source": "collas-crill",
+    "reference_url": "data/commentary/jersey/hastings-bass.txt"
   }
 ]
