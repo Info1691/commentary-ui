@@ -1,1 +1,501 @@
+Anti-Bartlett clauses: what are the
+lessons to be learned from Zhang Li?
+Update prepared by Stephen Alexander (Partner, Jersey) and Tony Pursall
+(Consultant, London)
+Introduction
+The recent decision of the Hong Kong Court of Final Appeal (Final Court) in Zhang v DBS Bank (Hong
+Kong)1 (Zhang) dismisses the idea of a 'residual' or 'high-level supervisory' obligation upon trustees and
+endorses the effectiveness of a well-drawn anti-Bartlett clause that seeks to exclude any obligation upon
+the trustee to intervene in the management of an underlying company other than in the case of actual
+knowledge of dishonesty. This article reflects on this decision, and in particular, whether a 'residual' or
+'high-level supervisory' obligation should exist and what the decision in Zhang means for the trust industry
+and anti-Bartlett clauses more generally.
+Anti-Bartlett clauses
+Let us start by considering the anti-Bartlett clause itself. It stems from a trustee’s core duty to act, in relation
+to the trust’s investments, as the prudent person of business:
+'The duty of a trustee is not to take such care only as a prudent man would take if he had only himself to
+consider; the duty rather is to take such care as an ordinary prudent man would take if he were minded to
+make an investment for the benefit of other people for whom he felt morally bound to provide.2
+In Jersey,
+3 statute also requires trustees, 'so far as is reasonable' to 'preserve' and 'enhance' the value of the
+trust property'
+.
+4 The position under Guernsey law is substantively the same.5 Both Jersey and Guernsey
+duties are subject to the terms of the trust. The equivalent duties under both Cayman Islands and British
+Virgin Islands law are to preserve the trust fund and manage it for the benefit of the beneficiaries, following
+English law.6 According to the line of authorities following from Bartlett v Barclays Bank,
+7 where a trustee
+has a controlling interest in a company, this means that trustee shareholders cannot sit passively and leave
+the running of the company wholly to the directors. The trustee has a duty to monitor the business of the
+company and if appropriate to intervene in it. What, precisely, is appropriate will be judged at the time of
+the particular decision in light of the prevailing circumstances.
+Enter the anti-Bartlett clause. As modern trusts have been increasingly used to structure higher-risk
+investments, including family businesses, the use and scope of anti-Bartlett clauses, which are designed to
+delimit responsibilities in relation to the operation of those investments, has grown. From the professional
+trustee’s perspective, the implementation of such a clause is often significant, because he or she frequently
+will not have the skills in the relevant industries to run the company. Indeed, this may also be the view of
+those who do run the company. Such an outcome also avoids the duplication of cost with an overlapping
+of responsibilities between a professional trustee and the existing management in relation to the business
+in question.
+The wording of anti-Bartlett clauses varies. One occasionally sees clauses which simply confer a power on
+the trustee to leave the conduct of the company’s business to its directors. But that power, unless the trust
+instrument provides otherwise, must be exercised for the benefit of the beneficiaries, so is unlikely to make
+a substantive difference to the trustee’s investment duties in practice. It is more common for clauses to
+exclude what would otherwise be the trustee’s duty to monitor and intervene. Some clauses, including the
+one in Zhang, go further and exclude the power to intervene.
+The facts of Zhang
+The decisions of the Hong Kong Court of First Instance, Court of Appeal and Court of Final Appeal in
+Zhang are important because they are some of the very few decisions which grapple with the scope and
+effect of the clauses.
+The background facts can be briefly summarised as follows:
+1. In 2005, Zhang Hong Li (ZHL) and his wife Ji Zhengrong (Ji) were settlors of the Amsun Trust (the
+Trust), a Jersey law governed trust, the purpose of which was 'asset protection and family wealth
+succession purposes'
+8
 
+.
+
+2. The Trust was established with the assistance of DBS Bank (Hong Kong) Ltd (DBS Bank), with whom the
+settlors had a banking relationship. DBS Bank was the parent company of Nautilus Trustees Asia Ltd
+(the Former Trustee) and DHJ Management Ltd (DHJ), a BVI incorporated company providing
+management and corporate services. DBS Bank was also the parent company of Nautilus Corporate
+Services (Hong Kong) Ltd (DBS Corporate), which acted as DBS Bank’s Hong Kong corporate services
+and corporate nominee subsidiary.
+3. The Former Trustee was the original trustee of the Trust and the investments were to be held by a BVI
+company, Wise Lords Ltd (Wise Lords). Shares in Wise Lords were a Trust asset, held by the Former
+Trustee. Wise Lords’ sole director was DHJ. Edwin Lim and Peter Lee were directors of DHJ.
+4. The trust instrument contained a form of 'anti-Bartlett' clause. Paragraphs 4 and 5 of the First Schedule
+to the trust instrument contained express wording designed to disapply any duty, and to remove any
+power, which the Former Trustee might otherwise have had under the general law in relation to Wise
+Lords, unless the Former Trustee gained actual knowledge of dishonesty. Specifically:
+(a) Paragraph 4(a)(ii) imposed a mandatory requirement on the Former Trustee to leave the
+administration, management and conduct of the business to the directors and other authorised
+persons, including Ji as the company’s investment adviser, unless the Former Trustee had actual
+knowledge of dishonesty.
+(b) Paragraph 4(a)(iii) imposed an obligation to assume that the conduct of the business was being
+carried on competently, the Former Trustee being under no duty to take any steps to ascertain
+whether or not those assumptions were correct.
+(c) Paragraph 4(d) expressly provided that the Former Trustee was not to be liable in any way for any
+loss to the company or the trust fund arising from any act or omission of the directors and other
+persons (including Ji) even where the act was dishonest, fraudulent, negligent or otherwise.
+5. The relationship between the Former Trustee, DBS Corporate and Wise Lords was the subject of a
+services agreement, by which DBS Corporate was to perform or appoint one or more persons as
+nominees (which included DBS Corporate) to perform certain services in relation to Wise Lords. The
+services were the provision of a 'nominee' director, the provision of a registered office and onward
+transmission of correspondence, record keeping by company secretary and provision of bank
+signatories. After Ji transferred the one share in Wise Lords to DBS Trustee for the set-up of the Trust,
+the Former Trustee nominated DHJ to act as director of Wise Lords.
+6. By an investment advisor agreement, Ji was appointed the investment advisor of Wise Lords with the
+ability to issue investment instructions on its behalf to DBS Bank. Wise Lords maintained a private
+banking account with DBS Bank in Hong Kong, through which the investments were carried out. Wise
+Lords was served by one key relationship manager at DBS Bank (the RM).
+7. Between 2005 and 2008, Ji executed over 500 investment transactions for Wise Lords’ account. The
+bulk, some 340, comprised trades in mutual funds. Overall, these trades had generated handsome
+profits. The judge in the Court of First Instance found that by May 2008, Ji had become disenchanted
+with mutual funds, thinking that the US market was going into a deep recession, which would affect the
+global economy, in turn affecting mutual funds. She redeemed most of Wise Lords’ mutual fund
+holdings and switched her focus to investing heavily in foreign currencies, particularly Australian dollars
+(AUD) and euros (EUR), currency-linked notes, and, ultimately, currency decumulators,9 with increasing
+leverage.
+8. Between 2006 and 2008, Wise Lords’ overdraft facility was gradually increased from US$10 million to
+US$100 million. It was later found at trial that Ji had strongly and repeatedly pressed DBS Bank to
+increase the credit line, and that the RM had helped support the last few applications for increases by
+exaggerating to DBS Bank, ZHL’s and Ji’s assets and income.
+9. By August 2008, Wise Lords’ portfolio comprised over AUD122 million deposits (purchased in 11
+tranches on just six trading days in July and August 2008), currency-linked notes for US$20 million
+(linked to AUD and EUR) and some EUR deposits, against a US$96 million overdraft. The portfolio had
+grown substantially in a short time against leverage.
+10. However, by August 2008, the AUD began its decline against US dollars. The purchases incurred losses
+given the currency mismatch (against US dollars borrowing) and leverage. It was later found at trial
+that, despite the worrying AUD situation and repeated warnings from DBS Bank, Ji remained bullish
+and resisted unloading Wise Lords’ long positions at anything less than break-even point. What Ji did
+instead was to execute 'decumulators' for AUD76 million and €6 million. It was found at trial that Ji
+wanted to be able to sell Wise Lords’ substantial holdings of AUD only at the rate she wished and was
+willing to take substantial risks to do so.
+11. Over the subsequent months Wise Lords continued to suffer significant losses and by March 2009, it
+had suffered a net reduction in its Net Asset Value of around 70 per cent from its position in March
+2008.
+
+The decisions in Zhang
+The judge at trial found that Ji’s power to make investments was subject to the Former Trustee’s and DHJ’s
+power to override Ji’s decisions, or reverse transactions she conducted for Wise Lords. The Former Trustee
+and DHJ had 'high-level supervisory' roles, which remained notwithstanding (in the Former Trustee’s case)
+the effect of the 'anti-Bartlett' provisions identified above. The judge went on to note that, notwithstanding
+that the Former Trustee and DHJ had powers to perform supervisory functions, the powers were never
+exercised to reverse any of the 519 investment transactions made. In practice, approvals to transactions and
+credit facilities were sought from and given by DHJ and the Former Trustee after the event.
+In a judgment of July 2018, the Court of Appeal affirmed the First Instance Court’s decision and dismissed
+the appeals of the Former Trustee and DHJ. It also dismissed the plaintiffs’ cross-appeal. The Court of
+Appeal found that the scope of the 'residual obligation' on the Former Trustee and DHJ was a 'high-level
+supervisory duty'
+. The Court of Appeal stated:
+'What is important is that DBS Trustee itself recognized the purpose of this high level supervision is to
+ensure that the value of the trust fund is subject to appropriate controls, reviews, investment expertise
+and management. The bottom line for the implementation of this high level supervision was for DBS
+Trustee to approve the investments (although not pre-approving them) with the power to override Ji’s
+decisions and reverse the transaction she advised for Wise Lords. My view is when the Judge held that
+DBS Trustee had breached this high level supervisory duty which it had accepted, he was precisely
+addressing the very issue that the defendants had raised in their own case. This is in line with the
+expert evidence of Professor Matthews about the ‘core obligation’ of the trustee.
+'10
+Then, in December 2019, the Court of Final Appeal, released its judgment on the appeal from the Court of
+Appeal’s decision. Allowing the trustees’ appeal, it decided:
+1. The alleged 'high level supervisory duty' was inconsistent with and excluded by the anti-Bartlett
+provisions of the trust deed. Accordingly, given the terms of the trust, the court said there is no 'high
+level supervisory duty' which would have required the Former Trustee to query and disapprove of the
+transactions entered into by the company, thereby interfering with Ji’s management of the company.
+2. Whilst Ji sought the Former Trustee’s approval of the transactions, the evidence showed that the
+Former Trustee had no active supervisory role as the transactions were reported to the Former Trustee
+after the event, and the approvals represented a mere acknowledgement of the information received.
+3. In any event, even if the Former Trustee was under a duty to supervise the company’s investments, the
+court found that approval of the investments in question did not amount to gross negligence and any
+liability would be excluded by the exemption clause covering acts short of fraud, misconduct or gross
+negligence.
+Some preliminary observations on Zhang
+Before addressing the key question about the validity of anti-Bartlett clauses, we will discuss a number of
+other practical issues for trustees, settlors and their advisers which the judgment raises.
+The first is a drafting point, which does not appear to have been raised before the court in Zhang, in that
+there appears to have been a potential inconsistency between two of the key provisions which made up the
+anti-Bartlett clause. One of them stated that
+'the Trustees shall leave the administration management and conduct of the business and affairs of
+such company to the directors officers and other persons authorised to take part in the administration
+management or conduct thereof and the Trustees shall not be under any duty to supervise such
+directors officers or other persons so long as the Trustees do not have actual knowledge of any
+dishonesty relating to such business and affairs on the part of any of them.'11
+The other provided that
+'the Trustees shall assume at all times that the administration management and conduct of the
+business and affairs of such company are being carried on competently honestly diligently and in the
+best interests of the Trustees in their capacity as shareholders or howsoever they are interested therein
+until such time as they shall have actual knowledge to the contrary and so that the Trustees shall not
+be under any duty at any time to take any steps at all to ascertain whether or not the assumptions
+contained in this sub-clause are correct.'12
+Under the former provision, the trustee could only intervene if it had actual knowledge of dishonesty,
+whereas it seems implicit in the latter that they had a duty to intervene if they had actual knowledge that
+the business was not being conducted competently, honestly, diligently or in the best interests of the
+Trustees as shareholders. So, if they know that the company is say, being managed incompetently, but they
+have no knowledge of dishonesty, what should the trustee do? It is possible that they can rely on the
+former clause and do nothing, but given the possible inconsistency between the two, and the propensity of
+the courts to construe investment provisions strictly such that trustees retain discretion unless it is expressly
+
+excluded,13 a trustee should consider whether it should apply to the court for directions.
+The construction of these clauses may be an issue to be resolved in a future case, as the authors have seen
+these types of inconsistencies from time to time.14 In any event, the moral is to ensure that there are no
+inconsistencies in the drafting.
+The second issue is that the precise terms of the clause are important. In particular it is (probably)
+important to ensure that the power to intervene is excluded as well as the duty, albeit the latter is more
+common. For example, it has been held by the BVI Court that an exclusion of the trustee’s duty to interfere
+in the management of the underlying company15 did not
+'
+… relieve [the trustee] of the duty to satisfy itself from time to time that nothing untoward was
+affecting the value of the shares.'16
+In effect, the Trustee still had a duty to monitor the company’s business. The clause in Appleby v Citco did
+not exclude the duty to monitor or supervise the company’s business, but it is noteworthy that the Law
+Commission in England and Wales takes the view that it would not matter if it had done:
+'In some cases, a trustee will be unable to rely upon duty exclusion clauses as a matter of construction
+of the particular clause. For example, the terms of a trust may provide that the trustee shall not be
+obliged to supervise or interfere in the management of any company in which he holds the majority
+shareholding. This duty exclusion clause does not prevent the trustee from supervising or interfering in
+the management of the company. It does mean that the trustee who fails to supervise or to interfere is
+not automatically in breach of trust. But if the failure to supervise amounts to negligence on the part of
+the trustee, the duty exclusion clause should not save the trustee from liability. A trustee who fails to
+exercise a power when he or she should do so commits a breach of trust. In this example, liability is
+incurred by the trustee without any need to strike down the duty exclusion clause. As a matter of
+construction, the clause does not apply where the trustee has acted negligently.'17
+The Law Commission Report came out before Zhang but since Zhang does not specifically address the
+effect of duty exclusion clause, as opposed to the wider power exclusion clauses, it is still likely to represent
+the law.
+Thirdly, the way in which the underlying assets become the company’s assets may be relevant. Clearly, if
+the trustee decides to invest through an underlying company, it cannot be absolved from its usual
+investment duties as a result of that. On the other hand, if the shares are settled on trust with an antiBartlett clause in place, it should in principle apply.
+This brings us into the fourth preliminary issue which arises from Zhang, which concerns the general
+investment duties of the trustee. Part of the reason for the conclusion in Zhang that there was no high-level
+supervisory duty was the existence of certain provisions in relation to the trustee’s general investment
+duties. In short, they are as follows18:
+1. The acquisition of speculative investments was authorised.
+2. The Trustee had no duty to diversify investments.
+3. The statutory duty to preserve and enhance the value of the trust fund was excluded.
+It is not entirely clear from the judgment as to why these provisions were considered to be relevant—if the
+anti-Bartlett clause is valid, the only situation in which the trustee has a duty to intervene in the business of
+the company is actual knowledge of dishonesty on the part of the directors. If that is correct, it d oes not
+matter whether, for example, the assets are suitably diversified or speculative in nature. What would the
+position have been if these duties had not been modified in the trust instrument? It is hard to see how it
+could have made a difference, unless the trustee’s general duties of investment also apply to the
+management of the assets held in the company notwithstanding the anti-Bartlett clause, which itself seems
+to be inconsistent with the anti-Bartlett clause.
+If that is the case, does that mean that the trustee must take steps to ensure that the directors manage the
+assets in accordance with those duties? But if so, and the directors are in breach of those obligations, the
+only action the trustee can take is to apply to court for directions and it is arguable that they would have a
+duty to do so in those circumstances. That would be analogous to the situation where the investment
+powers are reserved by the settlor or conferred on a third party under the trust (we refer to such settlor or
+third party in this article as the Investment Manager) and the trustee has no concurrent investment power.19
+In that situation, if the Investment Manager abuses its power, it is likely that the trustee has a duty to apply
+to the court for directions.20 It must also be arguable that a duty to apply to court arises where the
+directors are in breach of their duties.
+If the trustee’s investment duties are relevant to the management of the company’s assets, it does also
+raise the question of whether the trustees had power to borrow for investment purposes, as that would not
+normally be permitted.21
+Reflecting on the residual duty22
+That brings us to the heart of the matter: the validity (or otherwise) of an anti-Bartlett clause which excludes
+
+the trustee’s power to intervene except in very limited circumstances, such as dishonesty on the part of the
+directors. At the heart of the Final Court’s reasoning is the view that there was no authority for the residual
+duty:
+'But adopting the reading proposed by the Court of Appeal is even more difficult as it entails accepting
+that Matthews was intending to advocate the existence of a broad implied residual obligation arising
+outside of, and contradicting or overriding, the express anti-Bartlett provisions held by both experts to
+be valid under Jersey law. No authority is cited for such an obligation and it is difficult to see any
+principle which justifies its existence and, as mentioned, it would be inconsistent with Matthews’ earlier
+statement. Anti-Bartlett provisions are generally incorporated in the Trust Deed in cases like the
+present because the parties wish to enable the settlor or the settlor’s nominee freely to exercise control
+and management of the underlying company, especially regarding matters such as its investment
+decisions, and to relieve the trustees of any management or supervisory duties in that regard (save
+where extreme situations such as those involving actual knowledge of dishonesty might arise).'23
+Underhill and Hayton argue24 that there is a basis for a residual duty, citing Beauclerk v Ashburnham25 and
+Cowan v Scargill26 as authority for an overriding duty which cannot be ousted and the irreducible core
+content of trusteeship referred to in Armitage v Nurse.
+27 In our view, neither is authority for any such duty.
+Beauclerk v Ashburnham was decided on the basis of the construction of the trust deed, so the point did
+not arise. Similarly, it did not arise in Cowan v Scargill, as there was no exclusion of the trustee’s usual
+duties in that case.28 Nor do we think that Armitage v Nurse is of any relevance on this question, as it only
+dealt with the question of the minimum standard of care which applies to the exercise of the trustee’s
+duties, not the question of which duties can be modified or excluded by the trust instrument.29
+However, one principle which does seem to emerge from the cases dealing with investment direction
+powers is that the courts have been reluctant to construe them as excluding all trustee discretion. In
+practice, it is likely that they will normally be strictly construed (although a principle to that effect does not
+seem to have been stated explicitly) such that matters which are not expressly conferred on the Investment
+Manager remain with the trustee. As a result, trustees have been held to retain a power to satisfy
+themselves on the question of price30 and as to title and value of security.31
+There does not therefore seem to be any judicial authority for a residual duty, but might there be another
+ground for attacking the validity of such clauses? After all, the consequences of a valid anti-Bartlett clause
+are stark in a situation where fiduciaries are holding assets for the benefit of others: the trustees cannot
+intervene in the company’s business, even where they know that the directors of the company are in
+breach of their duties to the company and that the breach is causing loss to the trust fund. That would be
+the case even if beneficiaries asked the trustees to intervene (perhaps long after the settlors were gone).
+The trustee could presumably apply to the court for directions32 and, if necessary, for a variation of the trust
+to confer the necessary power to take action. Given its fiduciary position, it must at least be arguable that it
+has an obligation to do so. If so, the trustee may therefore be liable to the beneficiaries for failing to apply
+to court in order to preserve the value of the trust fund, even if the anti-Bartlett clause is valid.
+There are good arguments for upholding an anti-Bartlett clause and the courts will not lightly strike down
+arrangements which have been freely entered into. As it was put in Zhang:
+'To postulate that the parties’ chosen scheme may be overridden by some implied, non-derogable
+external duty arising in circumstances 'where no reasonable trustee could refrain from exercising
+otherwise excluded powers' would be to introduce an amorphous and ill-defined basis for undermining
+a legitimate arrangement consciously adopted by the parties, exposing the trustees to unanticipated
+risks of liability and sowing confusion as to the extent of their duties.'33
+The decision may also reflect distaste at parties (such as ZHL and Ji) who seek to retain control over
+investment functions and subsequently hold the trustee liable for any losses. But that is not in itself a
+justification for finding that there is no such duty or that anti-Bartlett clauses are valid. Rather, if there is a
+duty imposed on the trustees notwithstanding the anti-Bartlett clause, the settlors would not normally be
+able to bring proceedings (as beneficiaries) for a breach of that duty as they had consented to it in full
+knowledge of the facts.34 The company may also have a claim against the settlors for breach of contract or
+negligence or both in the performance of their investment management function, although that is likely to
+be more difficult to prove35 and to be much more fact-specific. If there is a claim against the directors, a
+beneficiary may compel the trustee to bring a claim and an anti-Bartlett clause will not prevent it.36
+Should wider policy considerations underpin how this issue is approached by the courts? Let us consider
+that question firstly from the perspective of two of the key stakeholders: the settlor and the trustee. One
+might argue that the assumption on the part of trustees and settlors is that the words of the trust
+instrument will, to the extent possible, be given effect. One might also argue that certainty for the settlor, in
+setting out intentions which he or she wishes to be put into effect, and for the trustees, who are clear on
+the precise scope of their duties and responsibilities, is important. A world in which trustees have residual
+
+duties, which are not easily defined, arguably erodes confidence for trustees and others involved in the
+industry, including those who provide funding for them. This may have a number of potentially undesirable
+consequences, including increased costs of trustee services, longer on-boarding processes and background
+checking, less choice in the market-place for those selecting trustees and greater restrictions on what
+trustees will do. Will settlors have less faith in the trust concept and, if so, might they consider alternative
+structuring and investment mechanisms? Although there is no express consideration of these policy issues
+in the Final Court’s ruling, it may be possible that some regard was given as to the consequences of the
+residual duty when the Final Court was determining the issue in Zhang. On the other hand, it might also be
+said that a valid anti-Bartlett clause still leaves a great deal of uncertainty about their operation and the
+trustee’s duties in practice, not least as to the question of if and when a trustee has a duty to apply to court
+for directions.
+In any event, if it is right that residual duties exist, where are the boundaries drawn? Can they be drawn in
+the same way in every case? Presumably not. The issues in Zhang were, in many ways, an extreme example
+of things going wrong. The losses sustained by the trust by 2009 was in excess of 70 per cent of its NAV—
+in the region of US$25 million. In the lead up to these losses Wise Lords’ overdraft facility had been
+increased, on Ji’s (the investment advisor) authorisation, from US$10 million to US$100 million and over 500
+investment transactions had been executed by Ji. While the trustee had the power to override or reverse
+Ji’s decisions, at least from a company law perspective, this power was never exercised. In practice,
+approvals to transactions and credit facilities were sought from and given by the trustee and DBS after the
+event. In a case of such high stakes and missed opportunities (as well as clear anti-Bartlett provisions), the
+issues around a potential residual duty are brought into focus, but the same might not be said in the
+majority of cases where the margins are much finer.
+What does 'high-level supervision' actually mean, in any event? Take, for example, a trust which holds a
+family trading company. How realistic is it for a trustee without any professional skills in the business of the
+family company to monitor its performance so as to work out whether something untoward is going on?
+Also, how practical it is for the trustee to obtain the information it needs about the business? Are there
+restrictions on the provision of such information? Would the articles of association of underlying companies
+need to be changed to permit the trustee access? It seems unlikely that these issues cannot be overcome
+with careful planning at the establishment of the trust, but it serves to illustrate that the nature of the highlevel supervisory duty will always be fact-dependent.37
+In considering this question it is worth stepping back to consider the main principle in Bartlett, which was
+that the trustee could not avoid its usual investment duties (in that case, the duty to avoid speculative or
+hazardous investments) simply by investing through a company. If an anti-Bartlett clause is valid, it must
+follow that the trust instrument can remove the trustee’s general investment duties whether or not the
+investments are managed through a company.
+Is that possible? Or is that something which the courts should strike down on public policy grounds? Public
+policy does not appear to have been raised in Zhang. It has been described as
+'
+…that which has a tendency to be injurious to the public or against the public good, which may be
+termed as it sometimes has been, the policy of the law, or public policy in relation to the administration
+of the law.'38
+Notwithstanding earlier dicta to the contrary,39 it is now settled law that there can be new heads of public
+policy: 'The truth of the matter seems to be that public policy is a variable thing. It must fluctuate with the
+circumstances of the time'40; and '[n]ew heads of public policy come into being, and old heads undergo
+modification.'41
+If a clause is struck down on public policy grounds, the effect is normally that it is void, unless the offending
+provision can be validated by deleting parts of it under the so-called 'blue-pencil rule'
+.
+42 It is not clear how
+that could leave a residual 'high-level' duty—either it is fully effective or it is entirely void and, if it is void,
+the trustee will have all the usual duties in relation to the management of the company’s assets. That would
+seem harsh on the trustee where it has accepted trusteeship on the express terms that it would not have
+any of those duties.
+Of course, settlors have no obligation to give anything to the beneficiaries (at least in jurisdictions where
+there are no forced heirship rules). If the settlors had retained the assets, they would have been entitled to
+allow the directors to mismanage the assets so that the value ultimately passing to the beneficiaries under
+their wills would be lower (or nothing). Why should a settlor not be able to settle assets on trust on the
+same basis?
+A possible answer to that may be that in the trust context, no one can hold the directors to account. While
+the shares in the company are owned by individuals, it is their decision to hold the directors to account
+
+(and their loss if they do not). Is it against the public interest for individuals to be able to settle their assets
+in such a way that no one is ultimately responsible for their management, despite the fact that they are
+held by a fiduciary for the benefit of others? It is unlikely that well-advised settlors would want that to be
+the case in all circumstances—they may be happy with that position while they are managing them but
+what of the position after they have passed away? What if it is another family member? It seems likely that
+he or she would want them to have some protection (perhaps an exclusion of liability for mere negligence),
+but would that extend to all breaches of duty, such that the other beneficiaries have no protection? What if
+it is a professional investment manager? But if that is what the settlor genuinely wants, then why should the
+courts not give effect to it?
+The decision raises some other difficult issues. As controlling shareholder, the trustee typically has power
+(as a matter of company law) to remove and appoint directors of the company. At some point, directors
+will retire, die or become incapable of acting. What should the trustee do? As this is not a case of
+dishonesty, can the trustee take action to appoint successors? On the natural meaning of the clause, the
+answer would appear to be no, although it would be possible in principle to avoid this particular problem
+by careful drafting. These are issues that are expressly dealt with under the VISTA43 legislation. VISTA
+provides for rules governing the appointment, retirement, removal and remuneration of directors and for
+the principles which should apply in the absence of office of director rules.44
+Assuming the trustees do appoint directors, can they then rely on the anti-Bartlett clause, so that the
+trustee cannot take any action, however incompetent the directors are, provided they are not dishonest?
+Could the trustee be liable for the appointment? It would be odd if they were not, but if so, that seems
+harsh as, once the directors are appointed, they cannot then remove them, even if they are incompetent or
+otherwise acting in breach of their duties.
+In those types of circumstances, a trustee would seem to have little choice but to apply to the court for
+directions. It was this concern that led the BVI to exclude any duty on the trustee of a VISTA trust to apply
+to court.45
+Conclusions
+Let us turn back to the questions posed at the beginning of this article, namely, should a residual duty on
+trustees exist and where does the decision in Zhang leave trustees and others working in the trust industry?
+Should they be confident in the protection that anti-Bartlett clauses offer, or should they nevertheless be
+exercising caution when considering their actions and conduct in light of these clauses?
+Our tentative view is that anti-Bartlett clauses should in principle be upheld, as there is no clear basis for a
+residual duty and no obvious public policy reason to strike them down, but the contrary is arguable and , if
+they are to be used, great care should be taken in drafting them. But, of course, what will be of most
+interest, in particular, is how the Jersey courts, applying Jersey law, or indeed, the courts in Cayman, BVI,
+Guernsey or any other offshore jurisdictions will approach the issue as and when it arises.
+Consideration should be given to including provisions permitting the trustee to intervene in carefully
+defined circumstances, and only when requested to do so. That is part of the framework of VISTA trusts, in
+which trustees can only intervene if called upon to do so by 'interested persons'46 (such a call is known as
+an 'intervention call') and only if one or more specified grounds (the 'permitted grounds for complaint') are
+made out. Indeed, it would often be preferable to use a special trust regime, such as VISTA or STAR47 which
+would give greater certainty for both trustees and settlors and therefore reduce the likelihood of a court
+application being necessary.
+In terms of drafting new anti-Bartlett clauses in new trusts:
+1. It would be prudent to do so with the blue pencil test in mind so that offending provisions can be
+deleted if it were held to be void. In short, the test is that '
+.… to be severable, a provision had to be
+capable of being removed without adding to the remaining wording.' For an example of this technique
+in relation to forfeiture (no contest clauses)—see Drafting British Virgin Islands Trusts,48 paras 22.7 to
+22.14 (No-contest clauses).
+2. Consider including the equivalent of (1) office of director rules (2) permitted grounds for complaint and
+(3) intervention calls, to minimise the risk of there being a gap which means that the trustee’s only
+recourse is an application to court.
+3. For greater certainty, use a regime such as VISTA or STAR.
+With regard to existing trusts, the trust industry can take comfort from the observations of the Final Court,
+but it would seem prudent for the industry to adopt a defensive approach to how it deals with problems
+which arise where an anti-Bartlett clause is said to be in operation. We suggest that that defensive
+approach should include:
+1. As a starting point, understanding the scope of the anti-Bartlett clause in question. Does it address the
+supervision or conduct at hand? Is there any scope for widening the wording? If the assets of the trusts
+are financial investments, trustees may wish to reflect on whether, for example, there is room for
+
+expanding that scope so as to disclaim liability for their withholding approval for investments
+recommended by the investor advisor.
+2. It will usually be inappropriate for a trustee to disregard the anti-Bartlett provision completely and to
+instead deeply immerse themselves with those assets or that business. If the trustee does so, he or she
+may have assumed a duty of care to the beneficiaries. The trustee will then be required to take wider,
+more substantive steps if they are to avoid a claim for breach of trust.
+3. A trustee should, nevertheless, stay engaged in relation to the assets under his or her control. If that is
+the shares in an underlying company in respect of which he or she is not a director and has little or no
+day-to-day involvement, then he or she should be considering, notwithstanding the existence of an
+anti-Bartlett clause, whether he or she is doing enough to safeguard those assets under his control. At
+least, they must have a duty to take reasonable steps to ensure that they are likely to be on notice of
+an issue which does require them to intervene. Whether it is then enough to raise concerns with the
+Investment Manager or the directors (or both), or require an application to court for directions will be a
+difficult decision for the trustees which is likely to turn on its facts. If a trustee has wider responsibilities,
+then different considerations will apply. If in doubt, the trustee should take appropriate legal advice.
+Whatever the position the courts ultimately reach on the validity of anti-Bartlett clauses, it seems likely that
+those advising both trustees and settlors will be scrutinising these types of clauses in more detail in the
+future and they will be subject to a greater degree of negotiation.
+1 Zhang Hong Li and others v DBS Bank (Hong Kong) Ltd and others [2019] HKCFA 45.
+2 Re Whiteley (1886) 33 Ch. D. 347, 355 per Lindley LJ.
+3 Which is the law governing the Amsun trust, which was the trust subject to the decision in Zhang.
+4 Trusts (Jersey) Law 1984 art.21(3).
+5 Trusts (Guernsey) Law s.23(b).
+6 Lynton Tucker, Nicholas Le Poidevin and James Brightwell, Lewin on Trusts, 19th edn (Sweet & Maxwell, 2015), para.34–050 (Management of
+
+the trust property).
+7 Bartlett v Barclays Bank [1980] Ch 515; [1980] 2 W.L.R. 430.
+8 Zhang Hong Li and others v DBS Bank (Hong Kong) Ltd and others [2019] HKCFA 45 at [11.1].
+9 These were complex, high-risk instruments which were structured to allow a reduction in AUD and EUR holdings gradually over time.
+10 Zhang [2018] HKCA 435 at [6.14].
+11 Zhang [2018] HKCA 435 at [34] [emphasis added].
+12 Zhang [2018] HKCA 435 at [34] [emphasis added].
+13 We discuss this point further below.
+14 For example, very similar clauses were contained in the trust instruments in another recent case: In the Matter of the KSH No 4 Trust, the KSH
+no 5 Trusts, the KSH No 6 Trust and the GK and the JK Trusts [2017] JRC 214A: see [12].
+15 The trust instrument in that case incorporated the standard administrative provisions set out in Second Schedule to the BVI T rustee Act 1961
+(as amended) which include a common form Anti-Bartlett clause.
+16 Appleby Corporate Services (BVI) Ltd v Citco Trustees (BVI) Ltd BVIHC 156/2011, 20 January 2014.
+17 Law Commission Consultation Paper, LC 171 (2 December 2002), para.4.91, available at http://www.lawcom.gov.uk/project/trustee-exemptionclauses [Accessed 5 February 2020].
+18 The detailed provisions are set out in Zhang [2018] HKCA 435 at [33].
+19 If it does have investment powers, but they are subject to the direction of the Investment Manager, it can exercise them if i t does not receive
+investment directions: Re Hart’s Will Trust [1946] 2 All E.R. 557.
+20 Tucker, Le Poidevin and Brightwell, Lewin on Trusts, 19th edn (Sweet & Maxwell, 2015), para.34–059, (6).
+21 In re Suenson-Taylor’s Settlement Trusts [1974] 1 W.L.R. 1280; [1974] 3 All E.R. 397.
+22 When we refer to anti-Bartlett clauses in this section of the article, we mean the type of clause included in Zhang, where the power to
+intervene is excluded.
+23 Zhang [2018] HKCA 435 at [64].
+24 D. Hayton, P. Matthews and C. Mitchell (eds), Underhill and Hayton, The Law of Trusts and Trustees, 19th edn (LexisNexis, 2016), para.48.58.
+25 Beauclerk v Ashburnham (1845) 8 Beav 322.
+26 Cowan v Scargill [1985] Ch. 270; [1984] 3 W.L.R. 501.
+27 Armitage v Nurse [1998] Ch .241, at 253; [1997] 3 W.L.R. 1046.
+28 See also R. Davern, 'Trustee Residual Obligation: Is There a Basis for It?' (1999) 25(3) Trusts & Trustees 285–295.
+29 See also, Davern, 'Trustee Residual Obligation: Is There a Basis for It?' (1999) 25(3) Trusts & Trustees 285–295.
+30 Re Hill [1896] 1 Ch. 962, at 966; see also Re Hart’s Will Trusts [1943] 2 All E.R. 557.
+31 Re Hotham [1902] 2 Ch. 575.
+32 Contrast the position under a VISTA trust, which is discussed further below.
+33 Zhang 2018] HKCA 435 at [64].
+34 Tucker, Le Poidevin and Brightwell, Lewin on Trusts, 19th edn (Sweet & Maxwell, 2015), para.39–106 et seq.
+35 One reason for that is that the duties imposed on directors are not as onerous as those imposed on trustees and in particular , the prudent
+person of business rule does not normally apply to directors.
+36 Tucker, Le Poidevin and Brightwell, Lewin on Trusts, 19th edn (Sweet & Maxwell, 2015), para.34–059, (7).
+37 This point was acknowledged in another Jersey case: Re the L Trust [2017] JRC 168A at [90].
+38 Egerton v Brownlow (Earl) (1853) 4 HL Cas 1 at [196], per Lord Truro.
+39 'I deny that any court can invent a new head of public policy': Janson v Driefontein Consolidated Mines Ltd [1902] A.C. 484 at [491]–[492], per
+Lord Halsbury.
+40 Naylor, Benzon & Co Ltd v Krainische Industrie Gesellschaft [1918] 1 K.B. 331 at [342], per McCardie J.
+41 Re Jacob Morris (deceased) [1943] NSW SR 352 at [355]–[356], per Jordan CJ.
+42 Although in AN v Barclays Private Bank And Trust (Cayman) Ltd and Six Others [2006] CILR 367 it was held that words could be inserted to
+validate a clause, at least where there was an express provision in the trust instrument to that effect; this was the provision in the trust deed in
+the AN case: 'If anything herein contained is contrary to any such law then the offending provision shall be deleted or if possible constru ed in
+accordance with such law without prejudice to the remainder of the terms and provisions hereof.'
+43 Virgin Islands Special Trusts Act, 2003 (as amended) (VISTA).
+44 VISTA s.7; see also J. Kessler, T. Pursall and N. Chand, Drafting British Virgin Islands Trusts, 1st edn (Sweet & Maxwell, 2014), Ch.17 (VISTA
+
+Trusts).
+45 VISTA s.6(3)(d) provides that subject to the Act, the trustee '.… shall not apply to the court for any form of relief or remedy in relation to the
+company.'
+46 This includes beneficiaries.
+47 See, for example, J. Kessler and T. Pursall, Drafting Cayman Islands Trusts, 1st edn (Kluwer Law International, 2006), Ch.17 (STAR Trusts).
+48 Kessler, Pursall and Chand, Drafting British Virgin Islands Trusts, 1st edn (Sweet & Maxwell, 2014).
