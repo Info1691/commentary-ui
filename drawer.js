@@ -1,4 +1,3 @@
-/* drawer.js – full */
 (function(){
   if (window.__drawerInit) return;
 
@@ -19,7 +18,6 @@
     const drawer = document.createElement('nav');
     drawer.id = 'drawer';
     drawer.setAttribute('aria-label','Repos navigator');
-
     drawer.innerHTML = `
       <div class="drawer-header">
         <img src="logo.png" alt="" class="drawer-logo">
@@ -45,24 +43,24 @@
     backdrop.addEventListener('click', close);
     document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
 
-    // simple edge swipe (left-to-right to open, right-to-left to close)
-    let touchStartX=null;
-    document.addEventListener('touchstart',(e)=>{ touchStartX = e.touches[0].clientX; },{passive:true});
+    // basic swipe
+    let startX=null;
+    document.addEventListener('touchstart',(e)=>{ startX = e.touches[0].clientX; },{passive:true});
     document.addEventListener('touchend',(e)=>{
-      if (touchStartX==null) return;
-      const dx = (e.changedTouches[0].clientX - touchStartX);
-      if (!drawer.classList.contains('open') && touchStartX<30 && dx>40) open();
-      if (drawer.classList.contains('open') && dx<-40) close();
-      touchStartX=null;
+      if(startX==null) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      if(!drawer.classList.contains('open') && startX<30 && dx>40) open();
+      if(drawer.classList.contains('open') && dx<-40) close();
+      startX=null;
     });
 
-    return { open, close, drawer, backdrop };
+    return { open, close };
   }
 
-  let api = null;
+  let api=null;
   window.initRepoDrawer = function(toggleBtn){
-    if (!api) api = buildDrawer();
-    if (toggleBtn && !toggleBtn.__drawerBound){
+    if(!api) api = buildDrawer();
+    if(toggleBtn && !toggleBtn.__drawerBound){
       toggleBtn.addEventListener('click', ()=> api.open());
       toggleBtn.__drawerBound = true;
     }
