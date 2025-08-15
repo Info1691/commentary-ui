@@ -1,130 +1,140 @@
-/* commentary-ui/main.js
-   - Looks for commentary.json in multiple safe locations
-   - Populates the select, loads text files from reference_url
-   - Keeps everything read-only (no writes)
-*/
+/* commentary-ui/main.js – restores the text panel, keeps drawer + branding */
 (function () {
-  // ---------- tiny helpers ----------
-  const $ = (s) => document.querySelector(s);
+  // ------- DOM -------
+  const $ = (id) => document.getElementById(id);
   const els = {
-    select: $('#commentarySelect'),
-    jurisdiction: $('#jurisdiction'),
-    reference: $('#reference'),
-    source: $('#source'),
-    text: $('#commentaryText'),
-    exportBtn: $('#exportBtn'),
-    printBtn: $('#printBtn'),
-    status: $('#status')
+    select: $('commentSelect'),
+    jurisdiction: $('jurisdiction'),
+    reference: $('reference'),
+    source: $('source'),
+    text: $('commentText'),
+    exportBtn: $('exportBtn'),
+    printBtn: $('printBtn'),
+    status: $('status'),
+    drawerBtn: $('openDrawer'),
+    repoLinks: $('repoLinks'),
   };
-  const setStatus = (m) => { if (els.status) els.status.textContent = m || ''; };
 
-  // ---------- where to look for the registry ----------
-  // Works on GitHub Pages regardless of subpath depth.
-  const REGISTRY_PATHS = [
-    'data/commentary/commentary.json', // preferred (yours)
-    './data/commentary/commentary.json',
-    'commentary.json',                 // root fallback
-    './commentary.json'
+  // ------- helpers -------
+  const REGISTRY_CANDIDATES = [
+    'data/commentary/commentary.json',
+    'commentary.json',
+    'data/commentary.json'
   ];
 
-  async function fetchFirst(paths) {
+  const toJSON = (v) => JSON.stringify(v, null, 2);
+  const setStatus = (msg) => els.status.textContent = msg || '';
+
+  async function fetchWithFallback(paths) {
+    let lastErr;
     for (const p of paths) {
       try {
         const res = await fetch(p, { cache: 'no-store' });
-        if (!res.ok) continue;
+        if (!res.ok) throw new Error(`${p} → ${res.status}`);
         return await res.json();
-      } catch (_) { /* try next */ }
+      } catch (e) { lastErr = e; }
     }
-    throw new Error('Could not load commentary.json from expected locations');
+    throw lastErr || new Error('No registry paths succeeded.');
   }
 
-  function renderOptions(items) {
-    // Clear existing
-    els.select.innerHTML = '';
-    const ph = document.createElement('option');
-    ph.value = '';
-    ph.textContent = 'Select a Commentary';
-    els.select.appendChild(ph);
-
-    items.forEach((it, idx) => {
-      const o = document.createElement('option');
-      o.value = String(idx);
-      o.textContent = it.title || '(untitled)';
-      o.dataset.jurisdiction = it.jurisdiction || '';
-      o.dataset.reference = it.reference || '';
-      o.dataset.source = it.source || '';
-      o.dataset.url = it.reference_url || '';
-      els.select.appendChild(o);
+  function fillSelect(items) {
+    els.select.innerHTML = '<option value="">Select a Commentary</option>';
+    items.forEach((item, idx) => {
+      const opt = document.createElement('option');
+      opt.value = String(idx);
+      opt.textContent = item.title;
+      els.select.appendChild(opt);
     });
+  }
+
+  function renderMeta(item) {
+    els.jurisdiction.textContent = item?.jurisdiction || '—';
+    els.reference.textContent   = item?.reference || '—';
+    els.source.textContent      = item?.source || '—';
   }
 
   async function loadText(url) {
     const res = await fetch(url, { cache: 'no-store' });
-    if (!res.ok) throw new Error(`Failed to load: ${url}`);
-    return await res.text();
+    if (!res.ok) throw new Error(`${url} → ${res.status}`);
+    const txt = await res.text();
+    // Gentle cleanup only (do NOT alter content)
+    els.text.textContent = txt;
   }
 
-  function wireExport(filenameStem) {
-    els.exportBtn.onclick = () => {
-      const blob = new Blob([els.text.value || ''], { type: 'text/plain;charset=utf-8' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = (filenameStem || 'commentary') + '.txt';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(a.href);
-    };
+  function download(filename, content) {
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename || 'commentary.txt';
+    document.body.appendChild(a);
+    a.click();
+    URL.revokeObjectURL(a.href);
+    a.remove();
   }
 
-  function wirePrint() {
-    els.printBtn.onclick = () => window.print();
-  }
+  // ------- main flow -------
+  let registry = [];
+  let current = null;
+  let currentText = '';
 
-  async function init() {
+  (async function init() {
     try {
-      setStatus('Loading…');
-      const registry = await fetchFirst(REGISTRY_PATHS);
-
-      // Expecting an array of items
-      const items = Array.isArray(registry) ? registry : [];
-      renderOptions(items);
-
-      els.select.onchange = async (e) => {
-        const opt = e.target.selectedOptions[0];
-        if (!opt || !opt.dataset.url) {
-          els.text.value = '';
-          els.jurisdiction.textContent = '—';
-          els.reference.textContent = '—';
-          els.source.textContent = '—';
-          return;
-        }
-        const url = opt.dataset.url.trim();
-        els.jurisdiction.textContent = opt.dataset.jurisdiction || '—';
-        els.reference.textContent = opt.dataset.reference || '—';
-        els.source.textContent = opt.dataset.source || '—';
-
-        try {
-          setStatus('Fetching commentary text…');
-          const txt = await loadText(url);
-          els.text.value = txt;
-          setStatus(''); // clear
-          wireExport((opt.textContent || 'commentary').toLowerCase().replace(/\s+/g,'-'));
-        } catch (err) {
-          els.text.value = '';
-          console.error(err);
-          setStatus('Error: ' + err.message);
-        }
-      };
-
-      wireExport('commentary');
-      wirePrint();
-      setStatus('Ready.');
-    } catch (err) {
-      console.error(err);
-      setStatus('Init error: ' + err.message);
+      setStatus('Loading registry…');
+      registry = await fetchWithFallback(REGISTRY_CANDIDATES);
+      fillSelect(registry);
+      setStatus(''); // ready
+    } catch (e) {
+      setStatus('Init error: Could not load commentary.json from expected locations');
+      console.error(e);
     }
-  }
+  })();
 
-  document.addEventListener('DOMContentLoaded', init);
+  els.select.addEventListener('change', async () => {
+    const idx = Number(els.select.value);
+    if (Number.isNaN(idx)) return;
+    current = registry[idx];
+    renderMeta(current);
+    els.text.textContent = 'Fetching commentary text…';
+    setStatus('');
+    try {
+      if (!current?.reference_url) throw new Error('No reference_url for this item.');
+      await loadText(current.reference_url);
+      currentText = els.text.textContent;
+      setStatus('');
+    } catch (e) {
+      els.text.textContent = 'Unable to load the commentary text.';
+      setStatus(String(e.message || e));
+      console.error(e);
+    }
+  });
+
+  els.exportBtn.addEventListener('click', () => {
+    const name = (current?.reference || 'commentary').replace(/\s+/g, '_') + '.txt';
+    const content = currentText || els.text.textContent || '';
+    download(name, content);
+  });
+
+  els.printBtn.addEventListener('click', () => {
+    // Simple print of the whole page (keeps header branding);
+    // systems that need just the text can select/copy or export.
+    window.print();
+  });
+
+  // ------- Drawer (non-intrusive init; no duplicate buttons) -------
+  if (typeof window.initRepoDrawer === 'function') {
+    window.initRepoDrawer({
+      button: '#openDrawer',
+      drawer: '#repoDrawer',
+      list: '#repoLinks',
+      links: [
+        { label: 'Rules Repository',            href: 'https://info1691.github.io/rules-ui/' },
+        { label: 'Laws Repository',             href: 'https://info1691.github.io/laws-ui/' },
+        { label: 'Commentary Viewer',           href: 'https://info1691.github.io/commentary-ui/' },
+        { label: 'Trust Law Textbooks',         href: 'https://info1691.github.io/Law-Texts-ui/' },
+        { label: 'Compliance – Citations',      href: 'https://info1691.github.io/compliance-ui/' },
+        { label: 'Citations – Bulk Upload',     href: 'https://info1691.github.io/compliance-ui/bulk/' },
+        { label: 'Breaches Manager',            href: 'https://info1691.github.io/breaches-ui/' }
+      ]
+    });
+  }
 })();
