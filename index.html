@@ -1,38 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Commentary Viewer</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <!-- existing app styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- drawer styles (added) -->
+  <link rel="stylesheet" href="drawer.css">
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="Blue Chip Logo" id="logo" />
-    <h1>Commentary Viewer</h1>
+  <header class="app-header">
+    <img src="logo.png" alt="Logo" class="logo">
+    <h1 class="title">Commentary Viewer</h1>
   </header>
 
-  <main class="container">
-    <label for="commentarySelect">Select a Commentary</label>
-    <select id="commentarySelect">
-      <option>Select a Commentary</option>
-    </select>
+  <main class="wrap">
+    <section class="card">
+      <label for="commentarySelect"><strong>Select a Commentary</strong></label>
+      <select id="commentarySelect" class="select" aria-label="Select a Commentary">
+        <option value="">Select a Commentary</option>
+      </select>
 
-    <div class="meta">
-      <p><strong>Jurisdiction:</strong> <span id="jurisdiction">—</span></p>
-      <p><strong>Reference:</strong> <span id="reference">—</span></p>
-      <p><strong>Source:</strong> <span id="source">—</span></p>
-    </div>
+      <div class="meta" style="margin:12px 0;">
+        <div><strong>Jurisdiction:</strong> <span id="jurisdiction">—</span></div>
+        <div><strong>Reference:</strong> <span id="reference">—</span></div>
+        <div><strong>Source:</strong> <span id="source">—</span></div>
+      </div>
 
-    <textarea id="commentaryText" readonly placeholder="Select a commentary to view the full text here."></textarea>
-    <p id="error" class="error"></p>
+      <textarea id="commentaryText" class="input mono" rows="18"
+                placeholder="Select a commentary to view the full text here."></textarea>
 
-    <div class="buttons">
-      <button id="exportBtn">Export Commentary as .txt</button>
-      <button onclick="window.print()">Print</button>
-    </div>
+      <div class="toolbar" style="margin-top:12px;">
+        <button id="exportBtn" class="btn" type="button">Export Commentary as .txt</button>
+        <button id="printBtn" class="btn btn-light" type="button">Print</button>
+      </div>
+    </section>
   </main>
 
+  <!-- existing app logic -->
   <script src="main.js"></script>
+
+  <!-- drawer logic (added) -->
+  <script src="drawer.js"></script>
 </body>
 </html>
