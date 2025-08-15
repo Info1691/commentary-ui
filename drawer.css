@@ -1,57 +1,42 @@
-/* drawer.css – Left-side repo navigation drawer (below header) */
-:root{ --header-h: 64px; } /* adjust if your header is taller/shorter */
-
-.drawer {
-  position: fixed;
-  top: var(--header-h);
-  left: -260px;
-  width: 260px;
-  height: calc(100% - var(--header-h));
-  background: var(--bg);
-  color: #fff;
-  box-shadow: 2px 0 5px rgba(0,0,0,.3);
-  transition: left .30s ease;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
+/* drawer.css – full */
+:root{
+  --drawer-bg:#0b3960;
+  --drawer-text:#e7eef6;
+  --drawer-muted:#a9b6c6;
+  --drawer-backdrop: rgba(0,0,0,.35);
+  --drawer-width: 280px;
 }
 
-.drawer.open { left: 0; }
+#drawerBackdrop{
+  position:fixed;inset:0;background:var(--drawer-backdrop);
+  opacity:0;pointer-events:none;transition:opacity .18s ease;z-index:9998;
+}
+#drawerBackdrop.open{opacity:1;pointer-events:auto}
 
-.drawer-header {
-  font-size: 18px;
-  font-weight: 700;
-  padding: 14px 16px;
-  border-bottom: 1px solid rgba(255,255,255,.15);
+#drawer{
+  position:fixed;top:0;left:0;height:100vh;width:var(--drawer-width);
+  background:var(--drawer-bg);color:var(--drawer-text);
+  transform:translateX(-100%);transition:transform .18s ease;
+  box-shadow:2px 0 12px rgba(0,0,0,.25);z-index:9999;
+  display:flex;flex-direction:column;
+}
+#drawer.open{transform:translateX(0)}
+
+.drawer-header{
+  display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.12);
+}
+.drawer-title{margin:0;font-weight:700}
+.drawer-logo{
+  width:32px;height:32px;border-radius:6px;background:#fff;padding:5px;object-fit:contain;
+  box-shadow:0 0 0 2px rgba(255,255,255,.25) inset;
 }
 
-.drawer ul { list-style: none; margin: 0; padding: 0; flex: 1; }
-.drawer li { border-bottom: 1px solid rgba(255,255,255,.10); }
-.drawer a {
-  display: block; padding: 12px 16px; color: #fff; text-decoration: none; font-size: 15px;
+.drawer-list{list-style:none;margin:0;padding:8px 0;overflow:auto}
+.drawer-item a{
+  display:block;padding:10px 14px;color:var(--drawer-text);text-decoration:none;
 }
-.drawer a:hover { background: rgba(255,255,255,.10); }
+.drawer-item a:hover{background:rgba(255,255,255,.08)}
+.drawer-muted{color:var(--drawer-muted);font-size:12px;padding:8px 14px;border-top:1px solid rgba(255,255,255,.12)}
 
-.drawer-footer {
-  padding: 12px 16px; font-size: 12px; color: rgba(255,255,255,.65);
-  border-top: 1px solid rgba(255,255,255,.10);
-}
-
-/* Small blue toggle button placed just *below* header’s bottom edge, left side */
-.drawer-toggle {
-  position: fixed;
-  top: calc(var(--header-h) + 10px);
-  left: 12px;
-  background: var(--btn);
-  color: var(--btn-ink);
-  border: 0;
-  padding: 8px 10px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  z-index: 1100;
-}
-.drawer-toggle:hover { filter: brightness(.95); }
-
-/* If you can’t remove the old white button immediately, hide it: */
-.old-drawer-btn { display: none !important; }
+.btn, .btn-light{font:inherit}
+.btn-light{background:#eef3f8;color:#0b2239;border:0;border-radius:8px;padding:8px 12px;font-weight:600;cursor:pointer}
