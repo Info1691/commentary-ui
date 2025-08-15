@@ -1,56 +1,67 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Commentary Viewer</title>
-  <link rel="stylesheet" href="style.css?v=1" />
-  <link rel="stylesheet" href="drawer.css?v=1" />
+
+  <!-- Base styles (your existing file) -->
+  <link rel="stylesheet" href="style.css"/>
+
+  <!-- Drawer styles (new) -->
+  <link rel="stylesheet" href="drawer.css"/>
 </head>
 <body>
+  <!-- Header -->
   <header class="app-header">
-    <!-- ONE trigger only -->
-    <button id="openDrawer" class="btn btn-light" aria-controls="repoDrawer" aria-expanded="false">Repos</button>
+    <button id="repoBtn" class="btn btn-light" type="button" aria-controls="repo-drawer" aria-expanded="false">Repos</button>
     <img src="logo.png" alt="Logo" class="logo" />
     <h1 class="title">Commentary Viewer</h1>
   </header>
 
+  <!-- Page content (unchanged structure so main.js works) -->
   <main class="wrap">
-    <section class="card card-grow" aria-label="Commentary Viewer">
+    <section class="card">
       <h2 class="card-title">Select a Commentary</h2>
 
-      <!-- The JS looks for this id first -->
-      <label for="commentSelect" class="sr-only">Select a commentary</label>
-      <select id="commentSelect" class="select" aria-label="Select a Commentary">
-        <option value="">Select a Commentary</option>
-      </select>
-
-      <div class="meta">
-        <strong>Jurisdiction:</strong> <span id="jurisdiction">—</span>
-        <strong>Reference:</strong> <span id="reference">—</span>
-        <strong>Source:</strong> <span id="source">—</span>
+      <div class="toolbar">
+        <select id="select" class="select" aria-label="Select a Commentary">
+          <option>Select a Commentary</option>
+        </select>
       </div>
 
-      <pre id="commentText" class="text mono" aria-live="polite">Select a commentary to view the full text here.</pre>
+      <section class="meta">
+        <strong>Jurisdiction:</strong> <span id="jurisdiction">—</span>
+        &nbsp;&nbsp; <strong>Reference:</strong> <span id="reference">—</span>
+        &nbsp;&nbsp; <strong>Source:</strong> <span id="source">—</span>
+      </section>
 
-      <div class="actions">
+      <textarea id="docText" class="input mono" aria-live="polite"
+        placeholder="Select a commentary to view the full text here."></textarea>
+
+      <div class="actions" style="margin-top:10px;">
         <button id="exportBtn" class="btn btn-light" type="button">Export Commentary as .txt</button>
         <button id="printBtn" class="btn btn-light" type="button">Print</button>
       </div>
 
-      <p id="status" class="status" aria-live="polite"></p>
+      <p id="status" class="status"></p>
+
+      <footer class="footer" style="margin-top:10px;">
+        <small>Reads from <code>commentary.json</code> and text files under <code>data/commentary/</code>. No file writes.</small>
+      </footer>
     </section>
   </main>
 
-  <!-- Drawer container -->
-  <aside id="repoDrawer" class="drawer" hidden>
-    <nav class="drawer-body" aria-label="Repositories">
-      <h3 class="drawer-title">Repos</h3>
-      <ul id="repoLinks" class="drawer-links"></ul>
-    </nav>
-  </aside>
+  <!-- Your existing app logic -->
+  <script src="main.js" defer></script>
 
-  <script src="drawer.js?v=2"></script>
-  <script src="main.js?v=2"></script>
+  <!-- Drawer logic (new) -->
+  <script src="drawer.js" defer></script>
+  <script defer>
+    // Initialize the drawer AFTER the button exists
+    window.addEventListener('DOMContentLoaded', () => {
+      RepoDrawer.init('#repoBtn');
+    });
+  </script>
 </body>
 </html>
