@@ -84,4 +84,26 @@
       if (Array.isArray(data) && data.length) return data;
       return FALLBACK;
     } catch {
-     
+      return FALLBACK;
+    }
+  }
+
+  function render(list) {
+    const curr = location.href.replace(/\/+$/, '');
+    els.list.innerHTML = '';
+    list.forEach((r) => {
+      const a = document.createElement('a');
+      a.href = r.url;
+      a.className = 'item';
+      a.innerHTML = `${r.name}${r.desc ? `<small>${r.desc}</small>` : ''}`;
+      // Mark current repo (no hard styles; relies on hover styles)
+      if (curr.startsWith(r.url.replace(/\/+$/, ''))) {
+        a.style.borderColor = 'var(--drawer-line)';
+        a.style.background = 'var(--drawer-hover)';
+      }
+      els.list.appendChild(a);
+    });
+  }
+
+  loadRegistry().then(render);
+})();
