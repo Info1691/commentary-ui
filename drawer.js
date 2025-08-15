@@ -1,119 +1,87 @@
-<script>
-/* bc-drawer v2 — dynamic repo index for GitHub Pages
-   - Builds links on the current host (user.github.io)
-   - Safe class namespace (bc-), no collisions
-   - Left-side drawer; right-side drawers remain unaffected
+/* Minimal, self-initializing repo drawer
+   Looks for ./repos.json (array of {name,url,desc?})
+   Falls back to a sensible default list if missing.
 */
+(function () {
+  const BRAND_NAME = 'Navigator';
+  const LOGO_PATH = 'logo.png';       // assumes logo.png at repo root next to index.html
+  const REGISTRY  = 'repos.json';     // optional; if 404, fallback list is used
 
-/* Configure your repo slugs & titles once.
-   The code will output https://{current-host}/{slug}/
-*/
-window.BC_REPOS = window.BC_REPOS || [
-  { slug: 'compliance-ui', title: 'Compliance Citation Viewer' },
-  { slug: 'compliance-ui/bulk', title: 'Citations – Bulk Uploader' },
-  { slug: 'rules-ui', title: 'Rules Repository' },
-  { slug: 'laws-ui', title: 'Laws Repository' },
-  { slug: 'commentary-ui', title: 'Commentary Viewer' },
-  { slug: 'textbooks-ui', title: 'Trust Law Textbooks' },
-  { slug: 'breaches-ui', title: 'Breaches Repository' }
-];
+  const FALLBACK = [
+    { name: 'Rules Repository',        url: 'https://info1691.github.io/rules-ui/' },
+    { name: 'Laws Repository',         url: 'https://info1691.github.io/laws-ui/' },
+    { name: 'Commentary Viewer',       url: 'https://info1691.github.io/commentary-ui/' },
+    { name: 'Trust Law Textbooks',     url: 'https://info1691.github.io/Law-Texts-ui/' },
+    { name: 'Compliance – Citations',  url: 'https://info1691.github.io/compliance-ui/' },
+    { name: 'Citations – Bulk Upload', url: 'https://info1691.github.io/compliance-ui/bulk/' },
+    { name: 'Breaches Manager',        url: 'https://info1691.github.io/breaches-ui/' }
+  ];
 
-(function(){
-  const ORIGIN = window.location.origin; // e.g. https://yourname.github.io
-
-  const make = (tag, cls, html) => {
-    const el = document.createElement(tag);
-    if (cls) el.className = cls;
-    if (html != null) el.innerHTML = html;
-    return el;
-  };
-
-  // Toggle button
-  const btn = make('button', 'bc-drawer-toggle', 'Repos');
+  // ---- mount points
+  const btn = document.createElement('button');
+  btn.id = 'repoDrawer_toggle';
   btn.type = 'button';
-  btn.setAttribute('aria-expanded', 'false');
-  btn.setAttribute('aria-controls', 'bc-drawer');
-
-  // Dim overlay
-  const dim = make('div', 'bc-dim');
-
-  // Drawer shell
-  const drawer = make('aside', 'bc-drawer');
-  drawer.id = 'bc-drawer';
-  drawer.setAttribute('aria-hidden', 'true');
-  drawer.setAttribute('aria-label', 'Repositories');
-
-  // Header
-  const head = make('div', 'bc-drawer__head',
-    '<h2 class="bc-drawer__title">Repositories</h2>');
-  const close = make('button', 'bc-drawer__close', '×');
-  close.type = 'button';
-  close.setAttribute('aria-label', 'Close');
-  head.appendChild(close);
-
-  // Search
-  const searchWrap = make('div', 'bc-drawer__search');
-  const search = make('input', '');
-  search.type = 'search';
-  search.placeholder = 'Filter…';
-  searchWrap.appendChild(search);
-
-  // List
-  const ul = make('ul', 'bc-drawer__list');
-
-  function buildHref(slug){
-    // ensure single leading slash
-    const path = slug.startsWith('/') ? slug : '/' + slug;
-    // ensure trailing slash for GitHub Pages project sites
-    return ORIGIN + path.replace(/\/?$/, '/');
-  }
-
-  function render(filter=''){
-    const q = (filter||'').trim().toLowerCase();
-    ul.innerHTML = '';
-    (window.BC_REPOS || []).forEach(({slug, title})=>{
-      if (!slug || !title) return;
-      if (q && !title.toLowerCase().includes(q)) return;
-      const href = buildHref(slug);
-      const li = make('li', 'bc-drawer__item');
-      const a = make('a','', `<span>${title}</span><small>${new URL(href).pathname}</small>`);
-      a.href = href;
-      a.rel = 'noopener';
-      a.target = '_self'; // same tab
-      li.appendChild(a);
-      ul.appendChild(li);
-    });
-  }
-  render();
-
-  // Assemble & mount
-  drawer.appendChild(head);
-  drawer.appendChild(searchWrap);
-  drawer.appendChild(ul);
+  btn.innerHTML = `
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 5h12v2H3v-2zm0 5h18v2H3v-2z"/></svg>
+    Repos
+  `;
   document.body.appendChild(btn);
-  document.body.appendChild(dim);
-  document.body.appendChild(drawer);
 
-  // Open/close behavior
+  const overlay = document.createElement('div');
+  overlay.id = 'repoDrawer_overlay';
+  document.body.appendChild(overlay);
+
+  const shell = document.createElement('aside');
+  shell.id = 'repoDrawer';
+  shell.innerHTML = `
+    <header>
+      <img src="${LOGO_PATH}" alt="Logo"/>
+      <h3>${BRAND_NAME}</h3>
+    </header>
+    <nav class="list" id="repoDrawer_list" role="navigation" aria-label="Repositories"></nav>
+    <div class="foot">Press Esc to close • Swipe right to open, left to close</div>
+  `;
+  document.body.appendChild(shell);
+
+  const els = {
+    drawer: shell,
+    list: shell.querySelector('#repoDrawer_list'),
+    overlay
+  };
+
+  // ---- behavior
   const open = () => {
-    drawer.classList.add('open');
-    dim.classList.add('open');
-    drawer.setAttribute('aria-hidden','false');
-    btn.setAttribute('aria-expanded','true');
-    setTimeout(()=> search.focus(), 0);
+    shell.classList.add('open');
+    overlay.classList.add('show');
   };
-  const closeDrawer = () => {
-    drawer.classList.remove('open');
-    dim.classList.remove('open');
-    drawer.setAttribute('aria-hidden','true');
-    btn.setAttribute('aria-expanded','false');
-    btn.focus();
+  const close = () => {
+    shell.classList.remove('open');
+    overlay.classList.remove('show');
   };
-
   btn.addEventListener('click', open);
-  close.addEventListener('click', closeDrawer);
-  dim.addEventListener('click', closeDrawer);
-  document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer(); });
-  search.addEventListener('input', ()=> render(search.value));
-})();
-</script>
+  overlay.addEventListener('click', close);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+  // basic swipe close on touch
+  let startX = null;
+  document.addEventListener('touchstart', (e)=>{ startX = e.touches[0].clientX; }, {passive:true});
+  document.addEventListener('touchmove',  (e)=>{
+    if (startX === null) return;
+    const dx = e.touches[0].clientX - startX;
+    // If drawer is open and user swipes left enough, close
+    if (shell.classList.contains('open') && dx < -60) { close(); startX = null; }
+    // If drawer is closed and user swipes right from edge, open
+    if (!shell.classList.contains('open') && startX < 24 && dx > 60) { open(); startX = null; }
+  }, {passive:true});
+  document.addEventListener('touchend', ()=>{ startX = null; });
+
+  // ---- load registry (optional)
+  async function loadRegistry() {
+    try {
+      const res = await fetch(REGISTRY, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      if (Array.isArray(data) && data.length) return data;
+      return FALLBACK;
+    } catch {
+     
