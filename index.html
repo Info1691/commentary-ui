@@ -4,13 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Commentary Viewer</title>
-
-  <!-- Styles -->
   <link rel="stylesheet" href="style.css?v=1" />
   <link rel="stylesheet" href="drawer.css?v=1" />
 </head>
 <body>
   <header class="app-header">
+    <!-- ONE trigger only -->
     <button id="openDrawer" class="btn btn-light" aria-controls="repoDrawer" aria-expanded="false">Repos</button>
     <img src="logo.png" alt="Logo" class="logo" />
     <h1 class="title">Commentary Viewer</h1>
@@ -20,6 +19,7 @@
     <section class="card card-grow" aria-label="Commentary Viewer">
       <h2 class="card-title">Select a Commentary</h2>
 
+      <!-- The JS looks for this id first -->
       <label for="commentSelect" class="sr-only">Select a commentary</label>
       <select id="commentSelect" class="select" aria-label="Select a Commentary">
         <option value="">Select a Commentary</option>
@@ -31,7 +31,6 @@
         <strong>Source:</strong> <span id="source">—</span>
       </div>
 
-      <!-- The restored text panel -->
       <pre id="commentText" class="text mono" aria-live="polite">Select a commentary to view the full text here.</pre>
 
       <div class="actions">
@@ -43,7 +42,7 @@
     </section>
   </main>
 
-  <!-- Drawer container (drawer.js controls visibility) -->
+  <!-- Drawer container -->
   <aside id="repoDrawer" class="drawer" hidden>
     <nav class="drawer-body" aria-label="Repositories">
       <h3 class="drawer-title">Repos</h3>
@@ -51,8 +50,7 @@
     </nav>
   </aside>
 
-  <!-- Scripts -->
-  <script src="drawer.js?v=1"></script>
-  <script src="main.js?v=1"></script>
+  <script src="drawer.js?v=2"></script>
+  <script src="main.js?v=2"></script>
 </body>
 </html>
