@@ -4,8 +4,8 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Commentary Viewer</title>
-  <link rel="stylesheet" href="style.css?v=12"/>
-  <link rel="stylesheet" href="drawer.css?v=12"/>
+  <link rel="stylesheet" href="style.css?v=13"/>
+  <link rel="stylesheet" href="drawer.css?v=13"/>
 </head>
 <body>
   <header class="app-header" role="banner">
@@ -17,6 +17,7 @@
   <main class="wrap" id="app" aria-live="polite">
     <section class="card">
       <h2 class="section-title">Select a Commentary</h2>
+
       <label class="sr-only" for="commentarySelect">Select a Commentary</label>
       <select id="commentarySelect" class="select" aria-label="Select a commentary">
         <option value="">Select a Commentary</option>
@@ -39,7 +40,8 @@
     </section>
   </main>
 
-  <script src="drawer.js?v=12"></script>
-  <script src="main.js?v=12"></script>
+  <!-- IMPORTANT: drawer loads first; main.js runs after both DOM + drawer are ready -->
+  <script src="drawer.js?v=13" defer></script>
+  <script src="main.js?v=13" defer></script>
 </body>
 </html>
