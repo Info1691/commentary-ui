@@ -1,56 +1,29 @@
 :root{
-  --bg:#0b3960;          /* unified header/navy */
-  --ink:#0b2239;
-  --muted:#5b6b7a;
-  --card:#fff;
-  --line:#e6edf3;
-  --btn:#1e7dd7;
-  --btn-ink:#fff;
-  --pad:14px;
-  --radius:10px;
+  --bg:#0b3960; --ink:#0b2239; --muted:#5b6b7a;
+  --card:#fff; --line:#e6edf3; --btn:#1e7dd7; --btn-ink:#fff;
+  --pad:14px; --radius:10px;
   --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
 }
-
 *{box-sizing:border-box}
 html,body{height:100%}
 body{margin:0;background:#f6f8fb;color:var(--ink);font-family:var(--sans)}
 
-/* Header (brand-safe) */
-.app-header{
-  display:flex;align-items:center;gap:12px;
-  padding:12px 16px;background:var(--bg);color:#fff;
-}
-.logo{
-  width:40px;height:40px;border-radius:8px;
-  background:#fff;object-fit:contain;padding:6px;
-  box-shadow:0 0 0 2px rgba(255,255,255,.35) inset;
-}
+.app-header{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--bg);color:#fff}
+.logo{width:40px;height:40px;border-radius:8px;background:#fff;object-fit:contain;padding:6px;box-shadow:0 0 0 2px rgba(255,255,255,.35) inset}
 .title{margin:0;font-size:20px;font-weight:700}
 .nav-btn{margin-right:6px}
 
-/* Layout */
 .wrap{max-width:1100px;margin:22px auto;padding:0 16px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:var(--pad)}
 .section-title{margin:6px 0 10px}
 .meta{display:flex;gap:18px;flex-wrap:wrap;margin:10px 0}
-.text{
-  width:100%;min-height:48vh;resize:vertical;
-  padding:10px;border:1px solid var(--line);border-radius:8px;background:#fff;
-}
+.text{width:100%;min-height:48vh;resize:vertical;padding:10px;border:1px solid var(--line);border-radius:8px;background:#fff}
 .mono{font-family:var(--mono);font-size:13px;line-height:1.5}
 .actions{display:flex;gap:10px;margin-top:10px}
 .status{margin-top:10px;color:var(--muted)}
-
-.select{
-  width:100%;padding:10px;margin:6px 0 10px;
-  border:1px solid var(--line);border-radius:8px;background:#fff
-}
-
+.select{width:100%;padding:10px;margin:6px 0 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
 .btn{background:var(--btn);color:var(--btn-ink);border:0;padding:8px 12px;border-radius:8px;font-weight:600;cursor:pointer}
 .btn:hover{filter:brightness(.96)}
 .btn-light{background:#eef3f8;color:var(--ink)}
-
 .sr-only{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}
-
-/* Drawer styles are in drawer.css */
