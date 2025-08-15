@@ -1,0 +1,59 @@
+/* bc-drawer v2 — left-side repo switcher (safe & scoped) */
+:root{
+  --bc-nav:#0f3a5d;    /* brand navy */
+  --bc-ink:#fff;
+  --bc-bg:#ffffff;
+  --bc-line:#e6edf3;
+}
+
+.bc-drawer-toggle{
+  position:fixed; left:12px; bottom:16px; z-index:9999;
+  background:var(--bc-nav); color:var(--bc-ink);
+  border:0; border-radius:10px; padding:10px 12px;
+  font:600 14px/1 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  box-shadow:0 4px 12px rgba(0,0,0,.18); cursor:pointer;
+}
+.bc-drawer-toggle:focus{ outline:2px solid #cfe3f3; outline-offset:2px; }
+
+.bc-dim{
+  position:fixed; inset:0; background:rgba(0,0,0,.3);
+  z-index:9998; opacity:0; pointer-events:none; transition:opacity .2s;
+}
+
+.bc-drawer{
+  position:fixed; top:0; left:0; height:100dvh; width:min(360px,90vw);
+  transform:translateX(-102%); transition:transform .25s ease;
+  z-index:9999; background:var(--bc-bg); color:#0b2239;
+  border-right:1px solid var(--bc-line); box-shadow:6px 0 18px rgba(0,0,0,.12);
+  display:flex; flex-direction:column;
+}
+.bc-drawer.open{ transform:translateX(0); }
+.bc-dim.open{ opacity:1; pointer-events:auto; }
+
+.bc-drawer__head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 14px; background:var(--bc-nav); color:var(--bc-ink);
+}
+.bc-drawer__title{ margin:0; font:600 16px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; }
+.bc-drawer__close{
+  background:transparent; border:0; color:var(--bc-ink); font-size:22px; cursor:pointer;
+}
+
+.bc-drawer__search{
+  padding:10px 14px; border-bottom:1px solid var(--bc-line);
+}
+.bc-drawer__search input{
+  width:100%; padding:8px 10px; border:1px solid var(--bc-line); border-radius:8px;
+  font:14px system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+}
+
+.bc-drawer__list{
+  padding:8px 6px 14px; margin:0; list-style:none; overflow:auto; flex:1;
+}
+.bc-drawer__item a{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; padding:8px 10px; margin:4px 8px; border-radius:8px; text-decoration:none;
+  color:#0b2239; border:1px solid transparent;
+}
+.bc-drawer__item a:hover{ background:#f5f8fb; border-color:var(--bc-line); }
+.bc-drawer__item small{ color:#5b6b7a; }
