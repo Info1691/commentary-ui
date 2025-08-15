@@ -1,131 +1,130 @@
-// commentary-ui/main.js
-(function(){
-  const $ = (s, c = document) => c.querySelector(s);
-  const els = {};
-  let REG = [], CUR = null;
+/* commentary-ui/main.js
+   - Looks for commentary.json in multiple safe locations
+   - Populates the select, loads text files from reference_url
+   - Keeps everything read-only (no writes)
+*/
+(function () {
+  // ---------- tiny helpers ----------
+  const $ = (s) => document.querySelector(s);
+  const els = {
+    select: $('#commentarySelect'),
+    jurisdiction: $('#jurisdiction'),
+    reference: $('#reference'),
+    source: $('#source'),
+    text: $('#commentaryText'),
+    exportBtn: $('#exportBtn'),
+    printBtn: $('#printBtn'),
+    status: $('#status')
+  };
+  const setStatus = (m) => { if (els.status) els.status.textContent = m || ''; };
 
-  const setStatus = m => { const el = $('#status'); if (el) el.textContent = m || ''; };
+  // ---------- where to look for the registry ----------
+  // Works on GitHub Pages regardless of subpath depth.
+  const REGISTRY_PATHS = [
+    'data/commentary/commentary.json', // preferred (yours)
+    './data/commentary/commentary.json',
+    'commentary.json',                 // root fallback
+    './commentary.json'
+  ];
 
-  async function fetchJSON(p){ const r = await fetch(p,{cache:'no-store'}); if(!r.ok) throw new Error(`${p} → ${r.status}`); return r.json(); }
-  async function fetchText(p){ const r = await fetch(p,{cache:'no-store'}); if(!r.ok) throw new Error(`${p} → ${r.status}`); return r.text(); }
-
-  // Normalise text (NBSP, CRLF, common bullet squares, BOM)
-  function normalise(txt){
-    return String(txt || '')
-      .replace(/^\uFEFF/, '')                // BOM
-      .replace(/\u00A0/g,' ')                // NBSP
-      .replace(/\r\n/g,'\n')                 // CRLF → LF
-      .replace(/[\u25A0\u25AA\u25CF\u25E6]/g,'•'); // square/black bullets → •
-  }
-
-  // Try several URL candidates until one works
-  async function loadTextWithFallbacks(raw){
-    const here = new URL(window.location.href);
-    const base = here.origin + here.pathname.replace(/\/[^/]*$/, '/'); // repo folder
-
-    const isAbs = /^https?:\/\//i.test(raw||'');
-    const cleaned = (raw||'').replace(/^\.\//,'').replace(/^\/+/,'');
-    const enc = cleaned.split('/').map(encodeURIComponent).join('/');
-
-    const candidates = [
-      // as-given
-      isAbs ? raw : cleaned,
-      // encoded
-      isAbs ? raw : enc,
-      // prefix with data/commentary/
-      'data/commentary/' + cleaned,
-      'data/commentary/' + enc,
-      // common subfolders
-      'data/commentary/jersey/' + cleaned,
-      'data/commentary/jersey/' + enc,
-      'data/commentary/uk/' + cleaned,
-      'data/commentary/uk/' + enc,
-    ].map(u => isAbs ? u : (u.startsWith('http') ? u : base + u));
-
-    const tried = [];
-    for (const u of candidates){
+  async function fetchFirst(paths) {
+    for (const p of paths) {
       try {
-        const txt = await fetchText(u);
-        return { url:u, text: normalise(txt) };
-      } catch (e) {
-        tried.push(`${u} (${e.message})`);
-      }
+        const res = await fetch(p, { cache: 'no-store' });
+        if (!res.ok) continue;
+        return await res.json();
+      } catch (_) { /* try next */ }
     }
-    throw new Error(`No TXT found. Tried:\n- ` + tried.join('\n- '));
+    throw new Error('Could not load commentary.json from expected locations');
   }
 
-  async function loadRegistry(){
-    const paths = ['commentary.json','data/commentary.json','data/Commentary.json'];
-    for (const p of paths){
-      try{
-        const data = await fetchJSON(p);
-        if (Array.isArray(data)) { setStatus(`Loaded registry: ${p}`); return data; }
-      }catch{}
-    }
-    throw new Error('Could not load commentary.json from expected locations.');
+  function renderOptions(items) {
+    // Clear existing
+    els.select.innerHTML = '';
+    const ph = document.createElement('option');
+    ph.value = '';
+    ph.textContent = 'Select a Commentary';
+    els.select.appendChild(ph);
+
+    items.forEach((it, idx) => {
+      const o = document.createElement('option');
+      o.value = String(idx);
+      o.textContent = it.title || '(untitled)';
+      o.dataset.jurisdiction = it.jurisdiction || '';
+      o.dataset.reference = it.reference || '';
+      o.dataset.source = it.source || '';
+      o.dataset.url = it.reference_url || '';
+      els.select.appendChild(o);
+    });
   }
 
-  async function show(entry){
-    CUR = entry || null;
-    $('#jurisdiction').textContent = entry?.jurisdiction || '—';
-    $('#reference').textContent    = entry?.reference    || '—';
-    $('#source').textContent       = entry?.source       || '—';
-    $('#commentaryText').value     = '';
-
-    if (!entry?.reference_url){ setStatus('No reference_url on this item.'); return; }
-
-    try{
-      const { url, text } = await loadTextWithFallbacks(entry.reference_url);
-      $('#commentaryText').value = text;
-      setStatus(`Loaded: ${url}`);
-    }catch(err){
-      $('#commentaryText').value = '';
-      setStatus(err.message);
-      console.error(err);
-    }
+  async function loadText(url) {
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`Failed to load: ${url}`);
+    return await res.text();
   }
 
-  function bind(){
-    els.select = $('#commentarySelect');
-    $('#exportBtn').addEventListener('click', ()=>{
-      if (!CUR) return;
-      const blob = new Blob([$('#commentaryText').value||''], {type:'text/plain;charset=utf-8'});
+  function wireExport(filenameStem) {
+    els.exportBtn.onclick = () => {
+      const blob = new Blob([els.text.value || ''], { type: 'text/plain;charset=utf-8' });
       const a = document.createElement('a');
-      a.download = `${(CUR.title||'commentary').replace(/[^-_\w\s]+/g,'').trim().replace(/\s+/g,'_')}.txt`;
       a.href = URL.createObjectURL(blob);
+      a.download = (filenameStem || 'commentary') + '.txt';
+      document.body.appendChild(a);
       a.click();
+      a.remove();
       URL.revokeObjectURL(a.href);
-    });
-    $('#printBtn').addEventListener('click', ()=> window.print());
-
-    els.select.addEventListener('change', ()=>{
-      const i = Number(els.select.value);
-      if (Number.isFinite(i) && REG[i]) show(REG[i]);
-      else { CUR = null; $('#commentaryText').value=''; setStatus('No commentary selected.'); }
-    });
+    };
   }
 
-  async function init(){
-    if (typeof window.initRepoDrawer==='function'){
-      window.initRepoDrawer($('#drawerToggle'));
-    }
-    bind();
-    try{
-      REG = await loadRegistry();
-      const sel = $('#commentarySelect');
-      sel.innerHTML = '<option value="">Select a Commentary</option>';
-      REG.forEach((it,idx)=>{
-        const o = document.createElement('option');
-        o.value = String(idx);
-        o.textContent = it.title || '(untitled)';
-        sel.appendChild(o);
-      });
-      if (REG.length){ sel.value='0'; show(REG[0]); }
-    }catch(err){
-      setStatus(`Init error: ${err.message}`);
+  function wirePrint() {
+    els.printBtn.onclick = () => window.print();
+  }
+
+  async function init() {
+    try {
+      setStatus('Loading…');
+      const registry = await fetchFirst(REGISTRY_PATHS);
+
+      // Expecting an array of items
+      const items = Array.isArray(registry) ? registry : [];
+      renderOptions(items);
+
+      els.select.onchange = async (e) => {
+        const opt = e.target.selectedOptions[0];
+        if (!opt || !opt.dataset.url) {
+          els.text.value = '';
+          els.jurisdiction.textContent = '—';
+          els.reference.textContent = '—';
+          els.source.textContent = '—';
+          return;
+        }
+        const url = opt.dataset.url.trim();
+        els.jurisdiction.textContent = opt.dataset.jurisdiction || '—';
+        els.reference.textContent = opt.dataset.reference || '—';
+        els.source.textContent = opt.dataset.source || '—';
+
+        try {
+          setStatus('Fetching commentary text…');
+          const txt = await loadText(url);
+          els.text.value = txt;
+          setStatus(''); // clear
+          wireExport((opt.textContent || 'commentary').toLowerCase().replace(/\s+/g,'-'));
+        } catch (err) {
+          els.text.value = '';
+          console.error(err);
+          setStatus('Error: ' + err.message);
+        }
+      };
+
+      wireExport('commentary');
+      wirePrint();
+      setStatus('Ready.');
+    } catch (err) {
       console.error(err);
+      setStatus('Init error: ' + err.message);
     }
   }
 
-  window.addEventListener('DOMContentLoaded', init);
+  document.addEventListener('DOMContentLoaded', init);
 })();
