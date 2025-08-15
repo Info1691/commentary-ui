@@ -4,68 +4,42 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Commentary Viewer</title>
-
-  <!-- Site styles (keep your existing style.css) -->
-  <link rel="stylesheet" href="style.css"/>
-
-  <!-- Drawer styles (new) -->
-  <link rel="stylesheet" href="drawer.css"/>
-
-  <style>
-    /* Brand header (harmonised navy + white-boxed logo) */
-    .app-header{display:flex;align-items:center;gap:12px;padding:12px 16px;background:#0b3960;color:#fff}
-    .logo{width:40px;height:40px;border-radius:8px;background:#fff;object-fit:contain;padding:6px}
-    .title{margin:0;font-size:20px;font-weight:700}
-    /* Page wrap */
-    .wrap{max-width:1100px;margin:20px auto;padding:0 16px}
-    .card{background:#fff;border:1px solid #e6edf3;border-radius:10px;padding:14px}
-    .meta{display:flex;gap:24px;margin:10px 0 8px}
-    .meta b{font-weight:600}
-    textarea{width:100%;min-height:460px;resize:vertical}
-    /* Make sure the drawer button does not overlap the logo */
-    .drawer-toggle{margin-left:auto}
-  </style>
+  <link rel="stylesheet" href="style.css?v=12"/>
+  <link rel="stylesheet" href="drawer.css?v=12"/>
 </head>
 <body>
-  <header class="app-header">
-    <img src="logo.png" alt="Logo" class="logo">
+  <header class="app-header" role="banner">
+    <button id="drawerToggle" class="btn btn-light nav-btn" type="button" aria-label="Open Repos Drawer">Repos</button>
+    <img src="logo.png" alt="Logo" class="logo"/>
     <h1 class="title">Commentary Viewer</h1>
-    <!-- Single drawer button (left drawer; no duplicate) -->
-    <button class="drawer-toggle" type="button" aria-label="Open repository navigator">Repos</button>
   </header>
 
-  <main class="wrap">
+  <main class="wrap" id="app" aria-live="polite">
     <section class="card">
-      <h2 style="margin:0 0 12px;">Select a Commentary</h2>
-
-      <label for="commentarySelect" class="sr-only">Select a Commentary</label>
-      <select id="commentarySelect" style="width:100%;padding:8px;border:1px solid #e6edf3;border-radius:8px;background:#fff">
-        <option value="">Select a commentary</option>
+      <h2 class="section-title">Select a Commentary</h2>
+      <label class="sr-only" for="commentarySelect">Select a Commentary</label>
+      <select id="commentarySelect" class="select" aria-label="Select a commentary">
+        <option value="">Select a Commentary</option>
       </select>
 
       <div class="meta">
-        <div><b>Jurisdiction:</b> <span id="jurisdiction">—</span></div>
-        <div><b>Reference:</b> <span id="reference">—</span></div>
-        <div><b>Source:</b> <span id="source">—</span></div>
+        <div><strong>Jurisdiction:</strong> <span id="jurisdiction">—</span></div>
+        <div><strong>Reference:</strong> <span id="reference">—</span></div>
+        <div><strong>Source:</strong> <span id="source">—</span></div>
       </div>
 
-      <textarea id="commentaryText" placeholder="Select a commentary to view the full text here." readonly></textarea>
+      <textarea id="commentaryText" class="text mono" readonly placeholder="Select a commentary to view the full text here."></textarea>
 
-      <div style="display:flex;gap:10px;margin-top:10px">
+      <div class="actions">
         <button id="exportBtn" class="btn" type="button">Export Commentary as .txt</button>
         <button id="printBtn" class="btn btn-light" type="button">Print</button>
       </div>
 
-      <p class="status" id="status" style="color:#5b6b7a;margin-top:10px">
-        Reads from <code>commentary.json</code> and text files under <code>data/commentary/</code>. No file writes.
-      </p>
+      <p class="status" id="status">Reads from <code>commentary.json</code> and text files under <code>data/commentary/</code>. No file writes.</p>
     </section>
   </main>
 
-  <!-- Your existing logic -->
-  <script src="main.js" defer></script>
-
-  <!-- Drawer (new) -->
-  <script src="drawer.js" defer></script>
+  <script src="drawer.js?v=12"></script>
+  <script src="main.js?v=12"></script>
 </body>
 </html>
