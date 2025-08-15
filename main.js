@@ -1,150 +1,92 @@
-/* commentary-ui/main.js – full, fixed */
-(function () {
-  // ===== DOM =====
+// commentary-ui/main.js – init AFTER drawer, AFTER DOM
+(function(){
   const $ = (s, c = document) => c.querySelector(s);
-  const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
 
-  const els = {
-    select: $('#commentarySelect'),
-    jurisdiction: $('#jurisdiction'),
-    reference: $('#reference'),
-    source: $('#source'),
-    text: $('#commentaryText'),
-    status: $('#status'),
-    exportBtn: $('#exportBtn'),
-    printBtn: $('#printBtn'),
-    drawerToggle: $('#drawerToggle'),
-  };
+  function setStatus(m){ const el=$('#status'); if(el) el.textContent=m||''; }
+  async function fetchJSON(p){ const r = await fetch(p,{cache:'no-store'}); if(!r.ok) throw new Error(`${p} → ${r.status}`); return r.json(); }
+  async function fetchText(p){ const r = await fetch(p,{cache:'no-store'}); if(!r.ok) throw new Error(`${p} → ${r.status}`); return r.text(); }
+  function norm(s){ return (s||'').replace(/\u00A0/g,' ').replace(/\r\n/g,'\n').replace(/[\u25A0\u25AA\u25CF\u25E6]/g,'•'); }
 
-  // init Drawer (single, no duplicates)
-  if (window.__drawerInit !== true && typeof window.initRepoDrawer === 'function') {
-    window.initRepoDrawer(els.drawerToggle);
-  }
+  const els = {};
+  let REG = [];
+  let CUR = null;
 
-  // ===== Helpers =====
-  const setStatus = (m) => (els.status.textContent = m || '');
-  const safe = (s) => (s == null ? '' : String(s));
-
-  async function fetchJSON(path) {
-    const res = await fetch(path, { cache: 'no-store' });
-    if (!res.ok) throw new Error(`${path} → ${res.status}`);
-    return res.json();
-  }
-
-  async function fetchText(path) {
-    const res = await fetch(path, { cache: 'no-store' });
-    if (!res.ok) throw new Error(`${path} → ${res.status}`);
-    return await res.text();
-  }
-
-  // Try multiple registry locations for resilience
-  const registryPaths = ['commentary.json', 'data/commentary.json'];
-
-  // ===== Load registry & hydrate select =====
-  async function loadRegistry() {
-    let registry = null;
-    let usedPath = '';
-    for (const p of registryPaths) {
-      try {
+  async function loadRegistry(){
+    // Try multiple locations (case-sensitive on GH Pages)
+    const paths = [
+      'commentary.json',
+      'data/commentary.json',
+      'data/Commentary.json'
+    ];
+    for(const p of paths){
+      try{
         const data = await fetchJSON(p);
-        if (Array.isArray(data)) {
-          registry = data;
-          usedPath = p;
-          break;
-        }
-      } catch (_) {}
+        if(Array.isArray(data)){ setStatus(`Loaded registry: ${p}`); return data; }
+      }catch(e){ /* continue */ }
     }
-    if (!registry) {
-      setStatus('Error: could not load commentary.json from expected locations.');
-      return [];
-    }
-
-    // build options
-    els.select.innerHTML = '<option value="">Select a Commentary</option>';
-    registry.forEach((item, idx) => {
-      const opt = document.createElement('option');
-      opt.value = String(idx);
-      opt.textContent = item.title || '(untitled)';
-      els.select.appendChild(opt);
-    });
-
-    setStatus(`Loaded registry: ${location.origin}${location.pathname.replace(/[^/]+$/,'')}${usedPath}`);
-    return registry;
+    throw new Error('Could not load commentary.json from expected locations');
   }
 
-  let REGISTRY = [];
-  let CURRENT = null;
+  async function show(entry){
+    CUR = entry || null;
+    $('#jurisdiction').textContent = entry?.jurisdiction || '—';
+    $('#reference').textContent   = entry?.reference    || '—';
+    $('#source').textContent      = entry?.source       || '—';
+    $('#commentaryText').value = '';
 
-  // ===== Load selected commentary =====
-  async function showEntry(entry) {
-    CURRENT = entry || null;
-    els.jurisdiction.textContent = entry?.jurisdiction || '—';
-    els.reference.textContent = entry?.reference || '—';
-    els.source.textContent = entry?.source || '—';
-    els.text.value = '';
-
-    if (!entry?.reference_url) {
-      setStatus('No reference_url set for this entry.');
-      return;
-    }
-    try {
+    if(!entry?.reference_url){ setStatus('No reference_url on this item.'); return; }
+    try{
       const txt = await fetchText(entry.reference_url);
-      els.text.value = normalizeGlyphs(txt);
+      $('#commentaryText').value = norm(txt);
       setStatus(`Loaded: ${entry.reference_url}`);
-    } catch (err) {
-      els.text.value = '';
+    }catch(err){
       setStatus(`Failed to load: ${entry.reference_url} → ${err.message}`);
     }
   }
 
-  // Normalize bullets/squares/nbsp from PDFs etc
-  function normalizeGlyphs(s) {
-    if (!s) return '';
-    return s
-      .replace(/\u25A0|\u25AA|\u25CF|\u25E6/g, '•')
-      .replace(/\u00A0/g, ' ')
-      .replace(/\r\n/g, '\n');
+  function bind(){
+    els.select = $('#commentarySelect');
+    $('#exportBtn').addEventListener('click', ()=>{
+      if(!CUR) return;
+      const blob = new Blob([$('#commentaryText').value||''], {type:'text/plain;charset=utf-8'});
+      const a = document.createElement('a');
+      a.download = `${(CUR.title||'commentary').replace(/[^-_\w\s]+/g,'').trim().replace(/\s+/g,'_')}.txt`;
+      a.href = URL.createObjectURL(blob);
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+    $('#printBtn').addEventListener('click', ()=> window.print());
+
+    els.select.addEventListener('change', ()=>{
+      const i = Number(els.select.value);
+      if(Number.isFinite(i) && REG[i]) show(REG[i]);
+      else { CUR=null; $('#commentaryText').value=''; setStatus('No commentary selected.'); }
+    });
   }
 
-  // ===== Events =====
-  els.select.addEventListener('change', () => {
-    const idx = parseInt(els.select.value, 10);
-    if (Number.isFinite(idx) && REGISTRY[idx]) {
-      showEntry(REGISTRY[idx]);
-    } else {
-      CURRENT = null;
-      els.text.value = '';
-      els.jurisdiction.textContent = '—';
-      els.reference.textContent = '—';
-      els.source.textContent = '—';
-      setStatus('No commentary selected.');
+  async function init(){
+    // ensure drawer API exists before binding button
+    if(typeof window.initRepoDrawer==='function'){
+      window.initRepoDrawer($('#drawerToggle'));
     }
-  });
-
-  els.exportBtn.addEventListener('click', () => {
-    if (!CURRENT) return;
-    const blob = new Blob([els.text.value || ''], { type: 'text/plain;charset=utf-8' });
-    const a = document.createElement('a');
-    const safeTitle = (CURRENT.title || 'commentary').replace(/[^-_\w\s]+/g, '').trim().replace(/\s+/g, '_');
-    a.download = `${safeTitle}.txt`;
-    a.href = URL.createObjectURL(blob);
-    a.click();
-    URL.revokeObjectURL(a.href);
-  });
-
-  els.printBtn.addEventListener('click', () => window.print());
-
-  // ===== Boot =====
-  (async function init() {
-    try {
-      REGISTRY = await loadRegistry();
-      // Auto-select first item if present (keeps prior behaviour)
-      if (REGISTRY.length) {
-        els.select.value = '0';
-        await showEntry(REGISTRY[0]);
-      }
-    } catch (err) {
+    bind();
+    try{
+      REG = await loadRegistry();
+      const sel = $('#commentarySelect');
+      sel.innerHTML = '<option value="">Select a Commentary</option>';
+      REG.forEach((it,idx)=>{
+        const o = document.createElement('option');
+        o.value = String(idx);
+        o.textContent = it.title || '(untitled)';
+        sel.appendChild(o);
+      });
+      if(REG.length){ sel.value='0'; show(REG[0]); }
+    }catch(err){
       setStatus(`Init error: ${err.message}`);
+      console.error(err);
     }
-  })();
+  }
+
+  // Run only after DOM is ready
+  window.addEventListener('DOMContentLoaded', init);
 })();
