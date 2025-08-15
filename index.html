@@ -5,67 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Commentary Viewer</title>
 
-  <!-- Your existing app styles -->
+  <!-- Site styles (keep your existing style.css) -->
   <link rel="stylesheet" href="style.css"/>
 
-  <!-- Drawer (left navigator) styles -->
+  <!-- Drawer styles (new) -->
   <link rel="stylesheet" href="drawer.css"/>
+
+  <style>
+    /* Brand header (harmonised navy + white-boxed logo) */
+    .app-header{display:flex;align-items:center;gap:12px;padding:12px 16px;background:#0b3960;color:#fff}
+    .logo{width:40px;height:40px;border-radius:8px;background:#fff;object-fit:contain;padding:6px}
+    .title{margin:0;font-size:20px;font-weight:700}
+    /* Page wrap */
+    .wrap{max-width:1100px;margin:20px auto;padding:0 16px}
+    .card{background:#fff;border:1px solid #e6edf3;border-radius:10px;padding:14px}
+    .meta{display:flex;gap:24px;margin:10px 0 8px}
+    .meta b{font-weight:600}
+    textarea{width:100%;min-height:460px;resize:vertical}
+    /* Make sure the drawer button does not overlap the logo */
+    .drawer-toggle{margin-left:auto}
+  </style>
 </head>
 <body>
-  <!-- Top header with logo + title (unchanged layout/IDs) -->
-  <header class="app-header" id="appHeader">
-    <img src="logo.png" alt="Logo" class="logo" />
+  <header class="app-header">
+    <img src="logo.png" alt="Logo" class="logo">
     <h1 class="title">Commentary Viewer</h1>
+    <!-- Single drawer button (left drawer; no duplicate) -->
+    <button class="drawer-toggle" type="button" aria-label="Open repository navigator">Repos</button>
   </header>
 
-  <!-- Drawer toggle appears just under the header (drawer.css positions it) -->
-  <button class="drawer-toggle" type="button" aria-controls="repoDrawer" aria-expanded="false">Repos</button>
-
-  <!-- LEFT DRAWER (below header). Edit links as needed. -->
-  <nav id="repoDrawer" class="drawer" aria-hidden="true">
-    <div class="drawer-header">Navigator</div>
-    <ul>
-      <li><a href="https://info1691.github.io/rules-ui/">Rules Repository</a></li>
-      <li><a href="https://info1691.github.io/laws-ui/">Laws Repository</a></li>
-      <li><a href="https://info1691.github.io/commentary-ui/">Commentary Viewer</a></li>
-      <li><a href="https://info1691.github.io/Law-Texts-ui/">Trust Law Textbooks</a></li>
-      <li><a href="https://info1691.github.io/compliance-ui/">Compliance – Citations</a></li>
-      <li><a href="https://info1691.github.io/compliance-ui/bulk/">Citations – Bulk Upload</a></li>
-      <li><a href="https://info1691.github.io/breaches-ui/">Breaches Manager</a></li>
-    </ul>
-    <div class="drawer-footer">Press Esc to close • Swipe right to open, left to close</div>
-  </nav>
-
-  <!-- Main app UI (existing structure/IDs preserved) -->
   <main class="wrap">
     <section class="card">
-      <h2 class="sr-only">Select a Commentary</h2>
-      <label for="commentarySelect" class="card-title">Select a Commentary</label>
-      <div>
-        <select id="commentarySelect" class="select" aria-label="Select a commentary">
-          <!-- Populated by main.js from commentary.json -->
-        </select>
+      <h2 style="margin:0 0 12px;">Select a Commentary</h2>
+
+      <label for="commentarySelect" class="sr-only">Select a Commentary</label>
+      <select id="commentarySelect" style="width:100%;padding:8px;border:1px solid #e6edf3;border-radius:8px;background:#fff">
+        <option value="">Select a commentary</option>
+      </select>
+
+      <div class="meta">
+        <div><b>Jurisdiction:</b> <span id="jurisdiction">—</span></div>
+        <div><b>Reference:</b> <span id="reference">—</span></div>
+        <div><b>Source:</b> <span id="source">—</span></div>
       </div>
 
-      <section class="meta" style="margin-top:14px;">
-        <div><strong>Jurisdiction:</strong> <span id="jurisdiction">—</span></div>
-        <div><strong>Reference:</strong> <span id="reference">—</span></div>
-        <div><strong>Source:</strong> <span id="source">—</span></div>
-      </section>
+      <textarea id="commentaryText" placeholder="Select a commentary to view the full text here." readonly></textarea>
 
-      <pre id="commentaryText" class="text" aria-live="polite" style="margin-top:12px; min-height:260px;">Select a commentary to view the full text here.</pre>
-
-      <div class="actions" style="margin-top:12px; display:flex; gap:10px;">
+      <div style="display:flex;gap:10px;margin-top:10px">
         <button id="exportBtn" class="btn" type="button">Export Commentary as .txt</button>
         <button id="printBtn" class="btn btn-light" type="button">Print</button>
       </div>
+
+      <p class="status" id="status" style="color:#5b6b7a;margin-top:10px">
+        Reads from <code>commentary.json</code> and text files under <code>data/commentary/</code>. No file writes.
+      </p>
     </section>
   </main>
 
-  <!-- Your existing app logic -->
+  <!-- Your existing logic -->
   <script src="main.js" defer></script>
 
-  <!-- Drawer behavior (toggles .open on #repoDrawer, manages aria state) -->
+  <!-- Drawer (new) -->
   <script src="drawer.js" defer></script>
 </body>
 </html>
