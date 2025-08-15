@@ -1,4 +1,3 @@
-/* drawer.css – full */
 :root{
   --drawer-bg:#0b3960;
   --drawer-text:#e7eef6;
@@ -6,37 +5,16 @@
   --drawer-backdrop: rgba(0,0,0,.35);
   --drawer-width: 280px;
 }
-
-#drawerBackdrop{
-  position:fixed;inset:0;background:var(--drawer-backdrop);
-  opacity:0;pointer-events:none;transition:opacity .18s ease;z-index:9998;
-}
+#drawerBackdrop{position:fixed;inset:0;background:var(--drawer-backdrop);opacity:0;pointer-events:none;transition:opacity .18s ease;z-index:9998}
 #drawerBackdrop.open{opacity:1;pointer-events:auto}
-
-#drawer{
-  position:fixed;top:0;left:0;height:100vh;width:var(--drawer-width);
-  background:var(--drawer-bg);color:var(--drawer-text);
-  transform:translateX(-100%);transition:transform .18s ease;
-  box-shadow:2px 0 12px rgba(0,0,0,.25);z-index:9999;
-  display:flex;flex-direction:column;
-}
+#drawer{position:fixed;top:0;left:0;height:100vh;width:var(--drawer-width);background:var(--drawer-bg);color:var(--drawer-text);transform:translateX(-100%);transition:transform .18s ease;box-shadow:2px 0 12px rgba(0,0,0,.25);z-index:9999;display:flex;flex-direction:column}
 #drawer.open{transform:translateX(0)}
-
-.drawer-header{
-  display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.12);
-}
+.drawer-header{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.12)}
 .drawer-title{margin:0;font-weight:700}
-.drawer-logo{
-  width:32px;height:32px;border-radius:6px;background:#fff;padding:5px;object-fit:contain;
-  box-shadow:0 0 0 2px rgba(255,255,255,.25) inset;
-}
-
+.drawer-logo{width:32px;height:32px;border-radius:6px;background:#fff;padding:5px;object-fit:contain;box-shadow:0 0 0 2px rgba(255,255,255,.25) inset}
 .drawer-list{list-style:none;margin:0;padding:8px 0;overflow:auto}
-.drawer-item a{
-  display:block;padding:10px 14px;color:var(--drawer-text);text-decoration:none;
-}
+.drawer-item a{display:block;padding:10px 14px;color:var(--drawer-text);text-decoration:none}
 .drawer-item a:hover{background:rgba(255,255,255,.08)}
 .drawer-muted{color:var(--drawer-muted);font-size:12px;padding:8px 14px;border-top:1px solid rgba(255,255,255,.12)}
-
 .btn, .btn-light{font:inherit}
 .btn-light{background:#eef3f8;color:#0b2239;border:0;border-radius:8px;padding:8px 12px;font-weight:600;cursor:pointer}
