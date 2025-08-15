@@ -4,44 +4,83 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Commentary Viewer</title>
-  <link rel="stylesheet" href="style.css?v=13"/>
-  <link rel="stylesheet" href="drawer.css?v=13"/>
+
+  <!-- Your site styles (unchanged) -->
+  <link rel="stylesheet" href="style.css"/>
+
+  <!-- Repos Drawer styles (new) -->
+  <link rel="stylesheet" href="drawer.css"/>
+
+  <!-- Brand color for address bar on mobile (optional, safe) -->
+  <meta name="theme-color" content="#0b3960"/>
 </head>
 <body>
+  <!-- ===== Header / Branding (unchanged except for the Repos button) ===== -->
   <header class="app-header" role="banner">
-    <button id="drawerToggle" class="btn btn-light nav-btn" type="button" aria-label="Open Repos Drawer">Repos</button>
+    <!-- Repos Drawer toggle button -->
+    <button id="drawerBtn" class="btn-light" type="button" aria-controls="repoDrawer" aria-expanded="false">Repos</button>
+
+    <!-- Brand logo (consistent size + white background via .logo rule) -->
     <img src="logo.png" alt="Logo" class="logo"/>
     <h1 class="title">Commentary Viewer</h1>
   </header>
 
-  <main class="wrap" id="app" aria-live="polite">
-    <section class="card">
-      <h2 class="section-title">Select a Commentary</h2>
+  <!-- ===== Main content (kept to IDs most Commentary main.js use) ===== -->
+  <main class="wrap" role="main">
+    <section class="card card-grow" aria-label="Commentary selector and viewer">
+      <h2 class="card-title">Select a Commentary</h2>
 
-      <label class="sr-only" for="commentarySelect">Select a Commentary</label>
-      <select id="commentarySelect" class="select" aria-label="Select a commentary">
-        <option value="">Select a Commentary</option>
-      </select>
-
-      <div class="meta">
-        <div><strong>Jurisdiction:</strong> <span id="jurisdiction">—</span></div>
-        <div><strong>Reference:</strong> <span id="reference">—</span></div>
-        <div><strong>Source:</strong> <span id="source">—</span></div>
+      <!-- Selector row -->
+      <div class="toolbar">
+        <label class="sr-only" for="commentarySelect">Select a Commentary</label>
+        <select id="commentarySelect" class="select" aria-label="Select a Commentary">
+          <option value="">Select a Commentary</option>
+          <!-- main.js will populate from commentary.json -->
+        </select>
       </div>
 
-      <textarea id="commentaryText" class="text mono" readonly placeholder="Select a commentary to view the full text here."></textarea>
+      <!-- Meta line -->
+      <div class="meta" id="meta">
+        <strong>Jurisdiction:</strong> <span id="jurisdiction">—</span>
+        &nbsp;&nbsp; <strong>Reference:</strong> <span id="reference">—</span>
+        &nbsp;&nbsp; <strong>Source:</strong> <span id="source">—</span>
+      </div>
 
-      <div class="actions">
+      <!-- Text panel (grows and scrolls inside the card) -->
+      <div class="card-grow" style="margin-top:10px;">
+        <pre id="docText" class="pre-fill mono" aria-live="polite">Select a commentary to view the full text here.</pre>
+      </div>
+
+      <!-- Actions -->
+      <div class="actions" style="margin-top:10px; display:flex; gap:10px;">
         <button id="exportBtn" class="btn" type="button">Export Commentary as .txt</button>
-        <button id="printBtn" class="btn btn-light" type="button">Print</button>
+        <button id="printBtn" class="btn-light" type="button">Print</button>
       </div>
 
       <p class="status" id="status">Reads from <code>commentary.json</code> and text files under <code>data/commentary/</code>. No file writes.</p>
     </section>
   </main>
 
-  <!-- IMPORTANT: drawer loads first; main.js runs after both DOM + drawer are ready -->
-  <script src="drawer.js?v=13" defer></script>
-  <script src="main.js?v=13" defer></script>
+  <!-- ===== Repos Drawer mount (safe to include on every repo) ===== -->
+  <div id="repoDrawer" aria-hidden="true"></div>
+
+  <!-- Optional: explicit list (otherwise drawer.js uses its built-in defaults) -->
+  <script>
+    window.REPO_LINKS = [
+      { label: "Rules Repository",        url: "https://info1691.github.io/rules-ui/" },
+      { label: "Laws Repository",         url: "https://info1691.github.io/laws-ui/" },
+      { label: "Commentary Viewer",       url: "https://info1691.github.io/commentary-ui/" },
+      { label: "Trust Law Textbooks",     url: "https://info1691.github.io/Law-Texts-ui/" },
+      { label: "Compliance – Citations",  url: "https://info1691.github.io/compliance-ui/" },
+      { label: "Citations – Bulk Upload", url: "https://info1691.github.io/compliance-ui/bulk/" },
+      { label: "Breaches Manager",        url: "https://info1691.github.io/breaches-ui/" }
+    ];
+  </script>
+
+  <!-- Drawer logic (new) -->
+  <script src="drawer.js" defer></script>
+
+  <!-- Your page logic (unchanged) -->
+  <script src="main.js" defer></script>
 </body>
 </html>
