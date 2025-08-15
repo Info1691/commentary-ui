@@ -1,148 +1,178 @@
-// commentary-ui/main.js v2 – robust ids + no duplicate drawer triggers
+// commentary-ui/main.js — robust loader with path fallbacks
 (function () {
-  const byId = (id) => document.getElementById(id);
-  const $ = (sel, root) => (root || document).querySelector(sel);
+  'use strict';
 
-  // Try several ids for backward-compat, fall back to first <select> in the card
-  function findSelect() {
-    return byId('commentSelect') ||
-           byId('commentarySelect') ||
-           byId('selectCommentary') ||
-           $('.card select');
-  }
-
+  // ---- DOM ----
+  const $ = (s) => document.querySelector(s);
   const els = {
-    select: findSelect(),
-    jurisdiction: byId('jurisdiction'),
-    reference: byId('reference'),
-    source: byId('source'),
-    text: byId('commentText'),
-    exportBtn: byId('exportBtn'),
-    printBtn: byId('printBtn'),
-    status: byId('status'),
-    drawerBtn: byId('openDrawer'),
-    repoLinks: byId('repoLinks'),
-    drawer: byId('repoDrawer')
+    select: $('#select'),
+    docText: $('#docText'),
+    jurisdiction: $('#jurisdiction'),
+    reference: $('#reference'),
+    source: $('#source'),
+    exportBtn: $('#exportBtn'),
+    printBtn: $('#printBtn'),
+    status: $('#status'),
   };
 
-  function setStatus(m){ if (els.status) els.status.textContent = m || ''; }
+  // Guard: if core elements missing, bail with a visible note
+  function must(el, name) {
+    if (!el) throw new Error(`Missing required element: ${name}`);
+  }
+  try {
+    must(els.select, 'select#select');
+    must(els.docText, 'textarea#docText');
+    must(els.jurisdiction, '#jurisdiction');
+    must(els.reference, '#reference');
+    must(els.source, '#source');
+    must(els.exportBtn, '#exportBtn');
+    must(els.printBtn, '#printBtn');
+  } catch (e) {
+    console.error(e);
+    if (els.status) els.status.textContent = `Init error: ${e.message}`;
+    return;
+  }
 
-  const REGISTRY_CANDIDATES = [
+  // ---- Helpers ----
+  const setStatus = (m) => { if (els.status) els.status.textContent = m || ''; };
+  const toText = (v) => (v == null ? '' : String(v));
+
+  async function fetchJSON(url) {
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`${url} → ${res.status}`);
+    return res.json();
+  }
+  async function fetchTXT(url) {
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`${url} → ${res.status}`);
+    return res.text();
+  }
+
+  async function fetchFirst(paths) {
+    const errs = [];
+    for (const p of paths) {
+      try { return { data: await fetchJSON(p), path: p }; }
+      catch (e) { errs.push(String(e.message || e)); }
+    }
+    throw new Error(`Could not load commentary.json from expected locations:\n- ${paths.join('\n- ')}\nErrors:\n${errs.join('\n')}`);
+  }
+
+  // Normalize entries to a common shape
+  function normalizeEntry(e) {
+    return {
+      title: toText(e.title),
+      jurisdiction: toText(e.jurisdiction),
+      reference: toText(e.reference),
+      source: toText(e.source),
+      reference_url: toText(e.reference_url), // path to .txt
+    };
+  }
+
+  // Render select options
+  function renderSelect(entries) {
+    els.select.innerHTML = ''; // safe now (we validated exists)
+    const opt0 = document.createElement('option');
+    opt0.textContent = 'Select a Commentary';
+    opt0.value = '';
+    els.select.appendChild(opt0);
+
+    entries.forEach((e, i) => {
+      const opt = document.createElement('option');
+      opt.value = String(i);
+      opt.textContent = e.title || `(untitled #${i + 1})`;
+      els.select.appendChild(opt);
+    });
+  }
+
+  // Load one commentary text + meta
+  async function loadEntry(entry) {
+    if (!entry) return;
+    setStatus('Fetching commentary text…');
+    els.jurisdiction.textContent = entry.jurisdiction || '—';
+    els.reference.textContent = entry.reference || '—';
+    els.source.textContent = entry.source || '—';
+    els.docText.value = ''; // clear
+
+    try {
+      // reference_url is stored relative to the repo root (e.g., data/commentary/jersey/foo.txt)
+      // fetchTXT will resolve it relative to current page automatically
+      const txt = await fetchTXT(entry.reference_url);
+      els.docText.value = txt;
+      setStatus('Loaded.');
+    } catch (err) {
+      const msg = `Failed to load text: ${entry.reference_url} → ${err.message || err}`;
+      console.error(msg);
+      els.docText.value = msg;
+      setStatus('Error.');
+    }
+  }
+
+  // Export to .txt (downloads the current textarea content)
+  function exportTxt(filenameBase) {
+    const blob = new Blob([els.docText.value || ''], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const safe = (filenameBase || 'commentary').replace(/[^\w.-]+/g, '_').slice(0, 80);
+    a.href = url;
+    a.download = `${safe}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  // ---- Init flow ----
+  const registryPaths = [
     'data/commentary/commentary.json',
+    'data/commentary.json',
     'commentary.json',
-    'data/commentary.json'
   ];
 
-  async function fetchJSON(url){
-    const r = await fetch(url, { cache: 'no-store' });
-    if(!r.ok) throw new Error(`${url} → ${r.status}`);
-    return r.json();
-  }
-  async function fetchTxt(url){
-    const r = await fetch(url, { cache: 'no-store' });
-    if(!r.ok) throw new Error(`${url} → ${r.status}`);
-    return r.text();
-  }
+  let REGISTRY = [];
 
-  async function loadRegistry() {
-    let lastErr;
-    for (const p of REGISTRY_CANDIDATES) {
-      try { return await fetchJSON(p); } catch(e){ lastErr = e; }
-    }
-    throw lastErr || new Error('No registry found.');
-  }
-
-  function fillSelect(items) {
-    if (!els.select) throw new Error('Select element not found.');
-    els.select.innerHTML = '<option value="">Select a Commentary</option>';
-    items.forEach((it, i) => {
-      const o = document.createElement('option');
-      o.value = String(i);
-      o.textContent = it.title;
-      els.select.appendChild(o);
-    });
-  }
-
-  function renderMeta(item){
-    if (els.jurisdiction) els.jurisdiction.textContent = item?.jurisdiction || '—';
-    if (els.reference)    els.reference.textContent    = item?.reference    || '—';
-    if (els.source)       els.source.textContent       = item?.source       || '—';
-  }
-
-  function download(name, content){
-    const blob = new Blob([content || ''], { type:'text/plain;charset=utf-8' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = name || 'commentary.txt';
-    document.body.appendChild(a); a.click(); URL.revokeObjectURL(a.href); a.remove();
-  }
-
-  // ---------- init ----------
-  let registry = [];
-  let current = null;
-  let currentText = '';
-
-  (async function init(){
-    try{
-      if (!els.select) throw new Error('Select element not found on page.');
+  async function init() {
+    try {
       setStatus('Loading registry…');
-      registry = await loadRegistry();
-      fillSelect(registry);
-      setStatus('');
-    }catch(e){
-      setStatus('Init error: Could not load commentary.json from expected locations');
-      console.error(e);
-    }
+      const { data, path } = await fetchFirst(registryPaths);
+      // Expecting an array
+      if (!Array.isArray(data)) throw new Error(`Registry is not an array (${path})`);
+      REGISTRY = data.map(normalizeEntry);
+      renderSelect(REGISTRY);
+      setStatus(`Loaded registry: ${path}`);
 
-    // Safe drawer init (does not create extra trigger)
-    if (typeof window.initRepoDrawer === 'function') {
-      window.initRepoDrawer({
-        button: '#openDrawer',
-        drawer: '#repoDrawer',
-        list:   '#repoLinks',
-        links: [
-          { label:'Rules Repository',        href:'https://info1691.github.io/rules-ui/' },
-          { label:'Laws Repository',         href:'https://info1691.github.io/laws-ui/' },
-          { label:'Commentary Viewer',       href:'https://info1691.github.io/commentary-ui/' },
-          { label:'Trust Law Textbooks',     href:'https://info1691.github.io/Law-Texts-ui/' },
-          { label:'Compliance – Citations',  href:'https://info1691.github.io/compliance-ui/' },
-          { label:'Citations – Bulk Upload', href:'https://info1691.github.io/compliance-ui/bulk/' },
-          { label:'Breaches Manager',        href:'https://info1691.github.io/breaches-ui/' }
-        ]
-      });
-    }
-  })();
-
-  // ---------- events ----------
-  if (els.select) {
-    els.select.addEventListener('change', async () => {
-      const idx = Number(els.select.value);
-      if (Number.isNaN(idx)) return;
-      current = registry[idx];
-      renderMeta(current);
-      if (els.text) els.text.textContent = 'Fetching commentary text…';
-      setStatus('');
-      try{
-        const path = current?.reference_url;
-        if (!path) throw new Error('No reference_url for this item.');
-        const txt = await fetchTxt(path);
-        currentText = txt;
-        if (els.text) els.text.textContent = txt;
-      }catch(e){
-        if (els.text) els.text.textContent = 'Unable to load the commentary text.';
-        setStatus(String(e.message || e));
-        console.error(e);
+      // If URL has ?i=n select it
+      const url = new URL(window.location.href);
+      const i = url.searchParams.get('i');
+      if (i && REGISTRY[+i]) {
+        els.select.value = String(+i);
+        loadEntry(REGISTRY[+i]);
       }
-    });
+    } catch (err) {
+      console.error(err);
+      setStatus(err.message || String(err));
+    }
   }
 
-  if (els.exportBtn) {
-    els.exportBtn.addEventListener('click', () => {
-      const name = (current?.reference || 'commentary').replace(/\s+/g,'_') + '.txt';
-      download(name, currentText || (els.text ? els.text.textContent : ''));
-    });
-  }
-  if (els.printBtn) {
-    els.printBtn.addEventListener('click', () => window.print());
-  }
+  // ---- Events ----
+  els.select.addEventListener('change', () => {
+    const idx = +els.select.value;
+    if (Number.isFinite(idx) && idx >= 0 && idx < REGISTRY.length) {
+      loadEntry(REGISTRY[idx]);
+      // keep index in URL for deep-linking
+      const u = new URL(window.location.href);
+      u.searchParams.set('i', String(idx));
+      history.replaceState(null, '', u.toString());
+    }
+  });
+
+  els.exportBtn.addEventListener('click', () => {
+    const idx = +els.select.value;
+    const base = (REGISTRY[idx]?.reference || REGISTRY[idx]?.title || 'commentary');
+    exportTxt(base);
+  });
+
+  els.printBtn.addEventListener('click', () => window.print());
+
+  // Kick off
+  document.addEventListener('DOMContentLoaded', init);
 })();
