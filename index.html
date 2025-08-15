@@ -5,45 +5,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Commentary Viewer</title>
 
-  <!-- existing app styles -->
-  <link rel="stylesheet" href="style.css">
+  <!-- Base styles -->
+  <link rel="stylesheet" href="style.css?v=12"/>
 
-  <!-- drawer styles (added) -->
-  <link rel="stylesheet" href="drawer.css">
+  <!-- Drawer (repo navigator) -->
+  <link rel="stylesheet" href="drawer.css?v=2"/>
+  <script defer src="drawer.js?v=2"></script>
 </head>
 <body>
+  <!-- App header -->
   <header class="app-header">
-    <img src="logo.png" alt="Logo" class="logo">
-    <h1 class="title">Commentary Viewer</h1>
+    <div class="header-inner">
+      <!-- Drawer trigger sits left, not on top of the logo -->
+      <button id="drawerToggle" class="btn btn-light drawer-trigger" type="button" aria-label="Open Repos Drawer">Repos</button>
+
+      <img src="logo.png" alt="Logo" class="logo" />
+      <h1 class="title">Commentary Viewer</h1>
+    </div>
   </header>
 
+  <!-- Drawer container -->
+  <aside id="repoDrawer" class="drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <strong>Navigator</strong>
+      <button id="drawerClose" class="btn btn-light small" type="button" aria-label="Close Drawer">Close</button>
+    </div>
+    <nav class="drawer-body" aria-label="Repositories">
+      <ul class="drawer-list">
+        <li><a href="https://info1691.github.io/rules-ui/">Rules Repository</a></li>
+        <li><a href="https://info1691.github.io/laws-ui/">Laws Repository</a></li>
+        <li><a href="https://info1691.github.io/commentary-ui/">Commentary Viewer</a></li>
+        <li><a href="https://info1691.github.io/Law-Texts-ui/">Trust Law Textbooks</a></li>
+        <li><a href="https://info1691.github.io/compliance-ui/">Compliance – Citations</a></li>
+        <li><a href="https://info1691.github.io/compliance-ui/bulk/">Citations – Bulk Upload</a></li>
+        <li><a href="https://info1691.github.io/breaches-ui/">Breaches Manager</a></li>
+      </ul>
+      <p class="drawer-hint">Press Esc to close • Swipe right to open, left to close</p>
+    </nav>
+  </aside>
+  <div id="drawerBackdrop" class="drawer-backdrop" hidden></div>
+
+  <!-- Main content -->
   <main class="wrap">
     <section class="card">
-      <label for="commentarySelect"><strong>Select a Commentary</strong></label>
-      <select id="commentarySelect" class="select" aria-label="Select a Commentary">
-        <option value="">Select a Commentary</option>
-      </select>
+      <h2 class="sr-only">Select a Commentary</h2>
 
-      <div class="meta" style="margin:12px 0;">
+      <label class="lbl" for="commentarySelect">Select a Commentary</label>
+      <div class="select-row">
+        <select id="commentarySelect" class="select" aria-label="Select a commentary"></select>
+        <span class="select-caret" aria-hidden="true">▸</span>
+      </div>
+
+      <div class="meta">
         <div><strong>Jurisdiction:</strong> <span id="jurisdiction">—</span></div>
         <div><strong>Reference:</strong> <span id="reference">—</span></div>
         <div><strong>Source:</strong> <span id="source">—</span></div>
       </div>
 
-      <textarea id="commentaryText" class="input mono" rows="18"
-                placeholder="Select a commentary to view the full text here."></textarea>
+      <textarea id="text" class="input mono" rows="18" readonly placeholder="Select a commentary to view the full text here."></textarea>
 
-      <div class="toolbar" style="margin-top:12px;">
+      <div class="actions">
         <button id="exportBtn" class="btn" type="button">Export Commentary as .txt</button>
         <button id="printBtn" class="btn btn-light" type="button">Print</button>
       </div>
+
+      <p id="status" class="status" aria-live="polite"></p>
     </section>
   </main>
 
-  <!-- existing app logic -->
-  <script src="main.js"></script>
+  <footer class="footer">
+    <small>Reads from <code>commentary.json</code> and text files under <code>data/commentary/</code>. No file writes.</small>
+  </footer>
 
-  <!-- drawer logic (added) -->
-  <script src="drawer.js"></script>
+  <script src="main.js?v=12"></script>
+  <script>
+    // Wire drawer to the button (no changes to drawer.js needed)
+    window.addEventListener('DOMContentLoaded', () => {
+      const openBtn = document.getElementById('drawerToggle');
+      const closeBtn = document.getElementById('drawerClose');
+      if (window.drawer) {
+        openBtn?.addEventListener('click', drawer.open);
+        closeBtn?.addEventListener('click', drawer.close);
+      }
+    });
+  </script>
 </body>
 </html>
