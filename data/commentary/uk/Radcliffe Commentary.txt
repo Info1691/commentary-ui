@@ -1,0 +1,212 @@
+A good account
+Matthew Mills
+Trustees:The importance of the duty
+
+“The taking of an account is the means by which a beneficiary requires a trustee to justify his
+stewardship of trust property.”
+-- Ultraframe (UK) Ltd v Fielding [2005] EWHC 1638 (Ch), at
+[1513] per Lewison J
+“It is the first duty of an accounting party, whether an agent, a trustee, a receiver, or an executor...”
+-- Pearse v Green (1819) 1 Jac & W 135, at 140 per Sir Thomas Plumer MR
+
+Our topics
+1. What the duty to account is
+2. What good accounts should contain
+3. What a beneficiary can do if a trustee or
+personal representative is refusing to account
+
+1. The duty to account
+www.4The content of the duty
+“It is, and must be understood to be, the bounden duty of
+an Executor, to keep clear and distinct accounts of the
+property which he himself is bound to administer.”
+-- Freeman v Fairlie (1817) 3 Mer 29, at 43 per Lord Eldon
+“a legatee has a clear right to have a satisfactory
+explanation of the state of the testator’s assets, and an
+inspection of the accounts, but he had no right to require
+a copy of the accounts at the expence of the estate”
+-- Ottley v Gilby (1845) 8 Beav 602, at 604 per Lord Langdale
+
+When the duty arises
+• “It is the first duty of an accounting party, whether an
+agent, a trustee, a receiver, or an executor… to be
+constantly ready with his accounts”: Pearse v Green
+(1819) 1 Jac & W 135, at 140 per Sir Thomas Plumer
+• In practice, produce the accounts within a reasonable
+period
+• The duty continues to apply to former trustees and PRs:
+Henchley v Thompson [2017] EWHC 225 (Ch) and re
+Thomas [1956] 1 WLR 1516
+
+To whom the duty is owed
+• “Every beneficiary is entitled to see the trust accounts, whether his
+interest is in possession or not”: Armitage v Nurse [1998] Ch 241, at 261
+per Millett LJ
+• A clause restricting the right to an account may be void: Jones v
+Shipping Federation of British Columbia (1963) 37 DLR (2d) 273
+• The duty is owed to:
+1. Beneficiaries who have a remainder interest: Re Dartnall [1895] 1
+Ch 474
+2. Beneficiaries who have a contingent interest: Re Tillott [1892] 1 Ch
+86
+3. Members of a class of discretionary beneficiaries: Re Murphy’s
+Settlements [1999] 1 WLR 282
+4. A beneficiary’s beneficiaries: Howes v Howes [2021] EWHC 591 (Ch)
+
+To whom the duty is owed
+• Caveats to the general rule:
+1. A beneficiary who has a future interest in capital will
+not normally be entitled to see income statements:
+Nestle v National Westminster Bank Plc (1988) [2000]
+WTLR 795, at 822 per Hoffmann J
+2. A beneficiary will normally only be entitled to see
+information relating to their sub-fund: Lewin on Trusts
+(20th ed, 2020), paragraph 21-035
+3. If a beneficiary is entitled to a specific legacy, they
+may only be entitled to information relating to that
+legacy: Probate Practice Manual, loose-leaf, paragraph
+E1.3A
+
+To whom the duty is owed
+“I do not think that it necessarily follows that all such
+documents must be disclosed to all beneficiaries. It
+must depend on what is needed in the circumstances
+for the beneficiaries to appreciate, verify and if need be
+vindicate their own rights against the trustees in respect
+of the administration of the trust. That will vary
+according to the facts of the case.”
+-- RNLI v Headley [2016] EWHC 1948 (Ch), at [14] per HHJ Matthews
+
+2. Good accounts
+www.radcliffechambers.com 1
+0The legal principles
+“Trustees must be ready to account to their beneficiaries for
+what they have done with the trust assets. This may be
+done with formal financial statements, or with less formal
+documents, or indeed none at all.”
+-- RNLI v Headley [2016] EWHC 1948 (Ch), at [11] per HHJ Matthews
+“furnish to the beneficiary sufficient information and
+documentation to enable the beneficiary to understand the movements on the account, the nature of the investments, the monies expended and recovered, the income earned, the expenses paid, and how, when, and on what basis investment decisions were made.”
+-- Best v Ghose [2018] IEHC 376, at [93] per Baker J 
+
+The practical guidance
+• Useful sources:
+1. STEP Accounting Guidelines (3rd ed, 2018)
+2. Tolley’s Administration of Estates, loose leaf,
+Division J (on lexis)
+3. Tolley’s Administration of Trusts, loose leaf,
+Division J (on lexis)
+4. Probate Practice Manual, loose-leaf, paragraph D3.3
+(on Westlaw)
+
+3. Litigating accounts
+www.radcliffechambers.com 1
+3Background
+• A “significant number” of complaints arise from the
+general lack of information given to beneficiaries: Tolley’s
+Administration of Estates, loose leaf, paragraph [J1.1]
+The main remedies:
+1. Apply to replace the trustee or PR: Jones v Firkin-
+Flood [2008] EWHC 2417 (Ch), at [234] per Briggs J
+(See my March 2021 junior programme talk)
+2. Apply for an order for an account
+3. In either case, ask for a costs order against the
+trustee or PR
+
+Our sub-topics
+• This part will cover:
+1. How to apply for an order for an account
+2. What the court will consider when deciding the claim
+3. The terms of the order for an account
+4. Costs
+5. Consequential matters
+
+How to apply for an order
+• Three options:
+1. Part 8 claim under rule 64.2(a) CPR and paragraph
+1(2)(a)(i) Practice Direction 64A
+2. Part 7 claim
+3. Summons in the probate District Registry which issued
+the grant: r. 61(2) Non-Contentious Probate Rules 1897
+• Don’t forget the court’s powers to make an order for:
+a) An interim account: rule 25.1(1)(n) CPR
+b) An account in a summary judgment application:
+paragraph 6 Practice Direction 24
+
+Deciding the claim
+“The court has a discretion whether or not to make an
+order for an account in common form to be produced by a
+trustee. Although it would not be right to say that there is
+a presumption in favour of making an order for an
+account, in my judgment, the court will not decline to
+make an order lightly where a trustee holds or has held
+assets for beneficiaries of a trust”
+-- Henchley v Thompson [2017] EWHC 225 (Ch), at [60] per
+Chief Master Marsh
+
+Deciding the claim
+2. A beneficiary does not need to prove a breach of
+trust: Partington v Reynolds (1858) 4 Drew 253, at
+255-256 per Sir R T Kindersley
+3. It is no excuse that the trustee or PR is inexperienced in keeping accounts: Wroe v Seed (1863) 4 Giff 425,
+at 429 per Sir John Stuart VC
+4. Trustees’ practical difficulties are given short shrift:
+e.g. Freeman v Fairlee (1812) 3 Mer 44
+
+Deciding the claim
+5. The court will consider the information which the trustee
+or PR has already provided to the beneficiary: Al-
+Dowaisan v Al-Salam [2019] EWHC 301 (Ch), at [150]
+6. A relaxed approach to limitation:
+a) Section 23 Limitation Act 1980 applies to claims for an account based on another cause of action
+b) A ‘pure’ claim for an account has no limitation period:
+Henchley v Thompson [2017] EWHC 225 (Ch), at [31]
+c) But excessive delay is relevant to the court’s
+discretion: e.g. Payne v Evens (1874) LR 18 Eq 356
+d) A consequential order for payment of money is subject
+to limitation: e.g. section 22(a) Limitation Act 1980
+
+Deciding the claim
+• When the court might refuse to order an account:
+1. It would be unnecessary or disproportionate: Henchley v Thompson [2017] EWHC 225 (Ch), at [21] per Chief Master Marsh
+2. The claimant has no more than a ‘theoretical possibility’ of benefitting from the trust: Schmidt v Rosewood [2003]
+UKPC 26, at [67] per Lord Walker
+3. The beneficiary simply wanted to use the account to ‘blackmail’ the trustee into settling an alleged claim:
+Campbell v Gillespie [1900] 1 Ch 225, at 229 per Cozens-Hardy J
+
+The order
+• The court has a wide discretion over what it will order:
+Reeves v Freeling (1812) 2 Phil 56
+• The court may “give directions as to the manner in which the account is to be taken and verified or the inquiry is to be conducted”: paragraph 1.1 Practice Direction 40A
+• High Court will give deadlines for providing the account
+and any objections: Chancery Guide, paragraph 23.2
+• Any party can apply for further directions: paragraph 1.3 of Practice Direction 40A
+
+Costs
+• There is no automatic entitlement to costs: RNLI v Headley [2016] EWHC 1948 (Ch), at [33]
+But the court will “normally” make a costs order against a defaulting trustee or PR: Lewin on Trusts (20th ed, 2020), paragraph 21-037; 
+Re Skinner [1904] 1 Ch 289
+• If the failure is particularly serious, the trustee or PR may be ordered to pay the costs of taking the account as well: Mason v Coleman [2007] EWHC 3070 (Ch), at [93]
+• If a beneficiary acts prematurely, they may face an adverse costs order: Re Dartnall [1895] 1 Ch 474
+
+Consequential matters
+• An order for account can be enforced by committal: e.g.
+Marshman v Brookes (1863) 32 LJ PM & A 95
+• Hall v Libertarian Investments Ltd [2013] HKCFA 93, at
+[168] per Lord Millett:
+“merely the first step in a process which enables him to
+identify and quantify any deficit in the trust fund and seek
+the appropriate means by which it may be made good”
+• On ‘falsifying’ and ‘surcharging’ see Snell’s Equity (34th ed, 2020), paragraphs 20-017 to 20-022
+• Alternatively, a beneficiary could exercise the (rarely used) right to demand an audit: section 13 Public Trustee Act
+1906 and rules 31-37 Public Trustee Rules 1912Matthew Mills
+Radcliffe Chambers
+11 New Square
+Lincoln’s Inn
+London
+WC2A 3QB
+T: 020 7831 0081
+F: 020 7405 2560
+DX: 319 London
+clerks@radcliffechambers.com
+www.radcliffechambers.com
